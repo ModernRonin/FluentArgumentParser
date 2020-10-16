@@ -59,6 +59,101 @@
                 Set this if you need to do special processing of parameters before they are passed onto verbs.
             </summary>
         </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Extensibility.IArgumentPreprocessor">
+            <summary>
+                <para>
+                    Implement this interface and set <see cref="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ArgumentPreprocessor" /> to your implementation
+                    if you want to pre-process arguments before they are fed into verbs.
+                </para>
+                One example use case for this would be if you are not happy with the quoting mechanism used by the combination of
+                shell and CLR runtime and want to customize it.
+            </summary>
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Extensibility.IExampleValueProvider">
+            <summary>
+                Implement this interface and pass it to one of the Create methods in <see cref="T:ModernRonin.FluentArgumentParser.ParserFactory" />
+                if you want to customize how values for example calls in help texts are generated.
+                Refer to <see cref="T:ModernRonin.FluentArgumentParser.Extensibility.DefaultExampleValueProvider" /> as an example for how to implement this interface.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Extensibility.IExampleValueProvider.For(ModernRonin.FluentArgumentParser.Definition.AParameter)">
+            <summary>
+                Generate an example value for a parameter.
+                <para>
+                    The default implementation picks from a list of constants for numeric types and for strings, uses the last
+                    label for enums and just <i>...</i> for everything else.
+                </para>
+            </summary>
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy">
+            <summary>
+                Implement this interface and pass it to one of the Create methods in <see cref="T:ModernRonin.FluentArgumentParser.ParserFactory" />
+                if you want to customize how verb and parameter names are generated from your POCOs.
+                Refer to <see cref="T:ModernRonin.FluentArgumentParser.Extensibility.DefaultNamingStrategy" /> as an example for how to implement this interface.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy.GetLongName(System.Reflection.PropertyInfo)">
+            <summary>
+                Generate the long parameter name for a property.
+                <para>
+                    The default implementation uses the property's name
+                    in kebab-cases form, so for example <i>MySpecialName</i> becomes <i>my-special-name</i>.
+                </para>
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy.GetShortName(System.Reflection.PropertyInfo,System.String[])">
+            <summary>
+                Generate the short parameter name for a property. <paramref name="shortNamesToBeExcluded" /> contains all short
+                names
+                that are already claimed by other parameters on the same verb.
+                <para>
+                    The default implementation takes the first character of the property's lower-cased name that has not been used
+                    yet. In the
+                    (hopefully very unlikely) event that there is no such character, it will use <seealso cref="F:System.Char.MinValue" />
+                    and additional configuration
+                    will be required to enable short-name usage.
+                </para>
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy.GetVerbName(System.Type)">
+            <summary>
+                Generate the verb name for a POCO.
+                <para>The default implementation uses the lower-cased type's name </para>
+            </summary>
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Extensibility.ITypeFormatter">
+            <summary>
+                Implement this interface and pass it to one of the Create methods in <see cref="T:ModernRonin.FluentArgumentParser.ParserFactory" />
+                if you want to customize how the types of parameters are formatted in help texts.
+                Refer to <see cref="T:ModernRonin.FluentArgumentParser.Extensibility.DefaultTypeFormatter" /> as an example for how to implement this interface.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Extensibility.ITypeFormatter.Format(ModernRonin.FluentArgumentParser.Definition.AParameter)">
+            <summary>
+                Generate the name to display for this type when displaying help for required or optional parameters.
+                <para>
+                    Note that you don't have to worry about <see cref="T:System.Boolean" /> types because they are handled by flag parameters
+                    and there is no type displayed for them in help texts.
+                </para>
+                <para>
+                    The default implementation uses
+                    <list type="bullet">
+                        <item>
+                            <term>for standard types like <see cref="T:System.Int32" /> or <see cref="T:System.String" /></term>
+                            <description>the C# type name</description>
+                        </item>
+                        <item>
+                            <term>for enum values</term>
+                            <description>a list of their valid string values</description>
+                        </item>
+                        <item>
+                            <term>for everything else</term>
+                            <description>the type's name</description>
+                        </item>
+                    </list>
+                </para>
+            </summary>
+        </member>
         <member name="T:ModernRonin.FluentArgumentParser.ParserFactory">
             <summary>
                 This is the main entry point into FluentArgumentParser and allows you to create parsers with different levels of
