@@ -8,12 +8,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <NoWarn />
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>C:\Projects\Github\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn />
+    <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
+    <DocumentationFile>C:\Projects\Github\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser.xml</DocumentationFile>
   </PropertyGroup>
   <Import Project="release.history" />
   <Import Project="..\.paket\Paket.Restore.targets" />

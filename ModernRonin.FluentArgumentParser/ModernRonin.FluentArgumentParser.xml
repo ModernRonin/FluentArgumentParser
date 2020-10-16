@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModernRonin.FluentArgumentParser</name>
+    </assembly>
+    <members>
+        <member name="T:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration">
+            <summary>
+                This encapsulates the easiest level of customization and used in conjunction with
+                <see cref="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Definition.ParserConfiguration)" />.
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.LongNamePrefix">
+            <summary>
+                How do we expect the user to prefix long argument names? Default: <code>--</code>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ShortNamePrefix">
+            <summary>
+                How do we expect the user to prefix short argument names? Default: <code>-</code>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ValueDelimiter">
+            <summary>
+                How do we expect the user to separate argument values from argument names? Default: <code>=</code>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.AreVerbNamesCaseSensitive">
+            <summary>
+                Should verb names be case-sensitive? Default: <code>false</code>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.AreLongParameterNamesCaseSensitive">
+            <summary>
+                Should long argument names be case-sensitive? Default: <code>true</code>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.AreShortParameterNamesCaseSensitive">
+            <summary>
+                Should short argument names be case-sensitive? Default: <code>false</code>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ApplicationName">
+            <summary>
+                This should be the name with which the application is called, so typically the name of your executable.
+                (But for example for a global dotnet tool, it should be set to what you configured for ToolCommandName, or for
+                a local dotnet tool it should be <pre>dotnet &lt;ToolCommandName&gt;</pre>.)
+                <para>this must be set explicitly and is not optional</para>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ApplicationDescription">
+            <summary>
+                A general description of what you app is used for.
+                <para>this must be set explicitly and is not optional</para>
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ArgumentPreprocessor">
+            <summary>
+                Set this if you need to do special processing of parameters before they are passed onto verbs.
+            </summary>
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.ParserFactory">
+            <summary>
+                This is the main entry point into FluentArgumentParser and allows you to create parsers with different levels of
+                customization.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(System.String,System.String)">
+            <summary>
+                Use this if you are fine with the default behavior of FluentArgumentParser.
+                The two parameters are both required for the generation of help texts.
+            </summary>
+            <param name="applicationName">
+                this should be what your users use to call your application, so in most cases the name of
+                the executable
+            </param>
+            <param name="applicationDescription">
+                this is the general description of what your tool does; empty values are not
+                allowed - because any good command-line tool should give their users an overview of its purpose and scope
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Definition.ParserConfiguration)">
+            <summary>
+                Use this if you want to customize things like case-sensitivity of verbs and arguments etc.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Definition.ParserConfiguration,ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy)">
+            <summary>
+                Use this if you want to customize how verb and short/long argument names are generated from
+                your POCOs.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Definition.ParserConfiguration,ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy,ModernRonin.FluentArgumentParser.Extensibility.ITypeFormatter,ModernRonin.FluentArgumentParser.Extensibility.IExampleValueProvider)">
+            <summary>
+                Use this if you want to customize how verb and short/long argument names and help texts are generated from
+                your POCOs.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy,ModernRonin.FluentArgumentParser.Extensibility.ITypeFormatter,ModernRonin.FluentArgumentParser.Extensibility.IExampleValueProvider,ModernRonin.FluentArgumentParser.Parsing.ICommandLineParser)">
+            <summary>
+                Use this if all the other overloads are not enough and you also want to customize parsing behavior itself,
+                beyond what <see cref="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ArgumentPreprocessor" /> allows you.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.CommandLineParser.#ctor(ModernRonin.FluentArgumentParser.Parsing.IVerbParser)">
+            <summary>
+                This constructor exists mostly for unit-tests, but obviously also forms an extension point for
+                the hopefully unlikely event that you find yourself in need of replacing <see cref="T:ModernRonin.FluentArgumentParser.Parsing.VerbParser" />.
+            </summary>
+            <param name="verbParser"></param>
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser">
+            <summary>
+                <para>
+                    The high-level construct to use for argument parsing.
+                    A parser can either have a default-verb (if your app doesn't need explicit verbs)
+                    or multiple verbs.
+                </para>
+                <para>
+                    Verbs are regular POCOs you define and register with the parser.
+                    In many scenarios, especially if you don't mind the default naming rules, you
+                    can work by just adding the verbs and call <see cref="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.Parse(System.String[])" />.
+                </para>
+                <para>
+                    If you want/need to fine-tune things, you can use the fluent API of the return values
+                    of <see cref="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.AddVerb``1" /> and <see cref="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.DefaultVerb``1" />.
+                </para>
+                <para>
+                    You can get an instance of a parser using <see cref="T:ModernRonin.FluentArgumentParser.ParserFactory" />. That class also has overloads
+                    allowing you to further customize the parser's behavior, for example how it espects arguments to be formatted.
+                </para>
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.AddVerb``1">
+            <summary>
+                Use this if your app supports verbs. The type parameter is a regular POCO. Use the return value to further
+                customize how FluentArgumentParser treats this verb.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.DefaultVerb``1">
+            <summary>
+                Use this if your app doesn't support verbs. The type parameter is a regular POCO. Use the return value to further
+                customize how FluentArgumentParser treats the parameters discovered from your POCO.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.AddContainerVerb``1">
+            <summary>
+                If you have nested verbs, this is what you call to define a container verb. Container verbs can have children, but
+                no parameters.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.Parse(System.String[])">
+            <summary>
+                Call this to run the parser. The return value will be either one of the POCOs you added with
+                <see cref="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.AddVerb``1" /> or <see cref="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.DefaultVerb``1" />, or <see cref="T:ModernRonin.FluentArgumentParser.Help.HelpResult" />.
+                The later is returned when the user explicitly requests help or when they supply invalid verbs or arguments.
+            </summary>
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding">
+            <summary>
+                You will never have to directly work this interface, but you will work with extension methods on it.
+            </summary>
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding`1">
+            <inheritdoc cref="T:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding" />
+        </member>
+        <member name="T:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1">
+            <summary>
+                FluentArgumentParser makes an effort to guess your intentions from looking at the properties of the POCOs you
+                supply for verbs, but
+                if you need more control, you can use the methods on <inheritdoc cref="T:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1" />.
+            </summary>
+            <typeparam name="TProperty"></typeparam>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1.MakeOptional">
+            <summary>
+                Turn a parameter optional. By default, all properties in your verb POCOs that have no specific initialization value
+                set, are assumed to be required parameters.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1.WithDefault(`0)">
+            <summary>
+                <para>
+                    If you want to change the auto-detected default value of an optional parameter or if you just turned a required
+                    parameter optional via
+                    <see cref="M:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1.MakeOptional" />, then you can use this method.
+                </para>
+                Auto-detection of default values uses what you set a construction time for a property. If the value you set differs
+                from what the property would have
+                if you didn't set anything, then the property/parameter is assumed to be optional and your initialization value is
+                used as a default value.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1.ExpectAt(System.Int32)">
+            <summary>
+                <para>
+                    Set the index at which this parameter is expected. This is only relevant when users don't use names to specify
+                    parameters
+                    and affects only required or optional parameters, but not flags.
+                </para>
+                By default, indices for parameters are derived from the order of properties in your POCOs, but this can become
+                different from
+                what you expect when your POCOs have base classes.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1.WithLongName(System.String)">
+            <summary>
+                Set the long name that can be used to specify a parameter. By default, the property-name is used.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1.WithShortName(System.String)">
+            <summary>
+                Set the short name that can be used to specify a parameter. By default, the first letter of the property-name is
+                used. If that letter is already in use by another property/parameter, the next one is
+                used and so on.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1.WithHelp(System.String)">
+            <summary>
+                Set the help description for this parameter/property. By default, the help text is empty.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.VerbBindingExtensions.GuardAgainstMissingBindCall(ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding)">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.VerbBindingExtensions.Rename``1(``0,System.String)">
+            <summary>
+                Rename the verb. (By default, the verb's name is derived from the type name of the POCO you supplied.)
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.VerbBindingExtensions.WithHelp``1(``0,System.String)">
+            <summary>
+                Set the general help text for this verb. By default the help text is empty.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.VerbBindingExtensions.Parameter``2(ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding{``1},System.Linq.Expressions.Expression{System.Func{``1,``0}})">
+            <summary>
+                Use this to configure a specific parameter in more detail.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.VerbBindingExtensions.Find(System.Collections.Generic.IEnumerable{ModernRonin.FluentArgumentParser.Parsing.IVerbBinding},ModernRonin.FluentArgumentParser.Definition.Verb)">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
+    </members>
+</doc>
