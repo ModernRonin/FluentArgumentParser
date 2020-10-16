@@ -8,7 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5F1B076-E0E6-4233-9FE9-A91B83F35A91}"
 	ProjectSection(SolutionItems) = preProject
 		paket.dependencies = paket.dependencies
-		TODO.md = TODO.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernRonin.FluentArgumentParser.Tests", "ModernRonin.FluentArgumentParser.Tests\ModernRonin.FluentArgumentParser.Tests.csproj", "{42CCD638-C1E6-4D29-91EA-305B8EE1B82D}"
