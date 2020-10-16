@@ -8,6 +8,9 @@ namespace ModernRonin.FluentArgumentParser.Parsing
 {
     public static class VerbBindingExtensions
     {
+        /// <summary>
+        ///     Internal use only.
+        /// </summary>
         public static void GuardAgainstMissingBindCall(this ILeafVerbBinding self)
         {
             if (!self.Bindings.Any())
@@ -17,6 +20,9 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             }
         }
 
+        /// <summary>
+        ///     Rename the verb. (By default, the verb's name is derived from the type name of the POCO you supplied.)
+        /// </summary>
         public static T Rename<T>(this T self, string newName) where T : IVerbBinding
         {
             if (self is ILeafVerbBinding leaf) GuardAgainstMissingBindCall(leaf);
@@ -25,12 +31,18 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             return self;
         }
 
+        /// <summary>
+        ///     Set the general help text for this verb. By default the help text is empty.
+        /// </summary>
         public static T WithHelp<T>(this T self, string helpText) where T : IVerbBinding
         {
             self.Verb.HelpText = helpText;
             return self;
         }
 
+        /// <summary>
+        ///     Use this to configure a specific parameter in more detail.
+        /// </summary>
         public static ParameterBindingConfigurer<TProperty> Parameter<TProperty, TTarget>(
             this ILeafVerbBinding<TTarget> self,
             Expression<Func<TTarget, TProperty>> accessor) where TTarget : new()
@@ -63,6 +75,9 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             }
         }
 
+        /// <summary>
+        ///     Internal use only.
+        /// </summary>
         public static ILeafVerbBinding Find(this IEnumerable<IVerbBinding> self, Verb verb)
         {
             return self.SelectMany(b => b.ThisAndChildren)
