@@ -1,0 +1,16 @@
+﻿cooltool
+another super cool tool blablabla
+
+Usage:
+cooltool sing | dance | explode [command specific options]
+
+Available commands:
+sing     sing you a song
+dance    dance to your tune
+explode  explode right into your face
+
+use help <command> for more detailed help on a specific command
+
+long parameter names are case-sensitive
+short parameter names are not case-sensitive
+command names are not case-sensitive

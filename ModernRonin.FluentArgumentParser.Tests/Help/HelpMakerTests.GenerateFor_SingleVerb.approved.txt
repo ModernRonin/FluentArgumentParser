@@ -1,0 +1,30 @@
+cooltool rect --x=<value> --y=<value> [--width=<value>] [--height=<value>] [--color=<value>] [--do-fill]
+
+Draws a rectangle.
+
+Required arguments:
+--x, -x  the x-coordinate
+         integer
+--y, -y  the y-coordinate
+         integer
+
+Optional arguments:
+--width, -w   the width
+              integer
+              default: 10
+--height, -h  the height
+              integer
+              default: 20
+--color, -c   the color to use
+              Red, Green, Blue
+              default: Green
+
+Flags:
+--do-fill, -f  fill the rectangle
+
+Examples:
+cooltool rect 10 20
+cooltool rect 10 20 30 40 Blue --do-fill
+cooltool rect --x=10 --y=20 --width=30 --height=40 --color=Blue --do-fill
+cooltool rect -x=10 -y=20 -w=30 -h=40 -c=Blue -f
+cooltool rect -h=40 -c=Blue -f -x=10 -y=20 -w=30

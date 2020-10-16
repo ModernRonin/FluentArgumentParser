@@ -1,0 +1,18 @@
+﻿myapp
+bla bla bla
+
+Usage:
+myapp publishfeature | startfeature | drawrectangle [command specific options]
+
+Available commands:
+publishfeature  
+startfeature    
+drawrectangle   
+
+use help <command> for more detailed help on a specific command
+
+long parameter names are case-sensitive
+short parameter names are not case-sensitive
+command names are not case-sensitive
+
+Unknown verb 'startfeatur'

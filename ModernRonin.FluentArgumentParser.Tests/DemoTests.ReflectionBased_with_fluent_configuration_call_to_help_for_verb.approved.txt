@@ -1,0 +1,27 @@
+﻿coolTool rect --x=<value> --y=<value> [--long-side=<value>] [--short-side=<value>] [--filling=<value>]
+
+draw a rectangle
+
+Required arguments:
+--x, -x  the x-coordinate
+         integer
+--y, -y  the y-coordinate
+         integer
+
+Optional arguments:
+--long-side, -ls   the long side of the rectangle
+                   integer
+                   default: 100
+--short-side, -ss  the short side of the rectangle
+                   integer
+                   default: 50
+--filling, -f      how to fill the rectangle
+                   None, Hatched, Solid
+                   default: Solid
+
+Examples:
+coolTool rect 10 20
+coolTool rect 10 20 30 40 Solid
+coolTool rect --x=10 --y=20 --long-side=30 --short-side=40 --filling=Solid
+coolTool rect -x=10 -y=20 -ls=30 -ss=40 -f=Solid
+coolTool rect -ss=40 -f=Solid -x=10 -y=20 -ls=30

@@ -1,0 +1,12 @@
+﻿cooltool consume drink --drink=<value>
+
+consume by drinking
+
+Required arguments:
+--drink, -d  the drink to drink
+             String
+
+Examples:
+cooltool drink alpha
+cooltool drink --drink=alpha
+cooltool drink -d=alpha

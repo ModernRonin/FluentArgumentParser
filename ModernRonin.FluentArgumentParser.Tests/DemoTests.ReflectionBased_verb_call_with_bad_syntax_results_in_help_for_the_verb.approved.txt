@@ -1,0 +1,16 @@
+﻿myapp startfeature --name=<value> [--dont-publish]
+
+
+Required arguments:
+--name, -n  String
+
+Flags:
+--dont-publish, -d  
+
+Examples:
+myapp startfeature alpha
+myapp startfeature alpha --dont-publish
+myapp startfeature --name=alpha --dont-publish
+myapp startfeature -n=alpha -d
+
+'name' was not given, but is required

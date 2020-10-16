@@ -1,0 +1,9 @@
+﻿cooltool consume eat | drink [command specific options]
+
+consume nutrition one way or another
+
+Available commands:
+eat    consume by eating
+drink  consume by drinking
+
+use help <command> for more detailed help on a specific command

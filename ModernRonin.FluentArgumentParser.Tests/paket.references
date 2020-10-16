@@ -1,0 +1,7 @@
+NUnit
+NUnit3TestAdapter
+Microsoft.NET.Test.Sdk
+NSubstitute
+FluentAssertions
+ApprovalTests
+FluentValidation

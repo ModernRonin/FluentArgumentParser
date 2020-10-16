@@ -1,0 +1,15 @@
+﻿coolTool
+this super-duper tool serves as a demo for the help generation
+
+Usage:
+coolTool feature | rect [command specific options]
+
+Available commands:
+feature  work with feature branches
+rect     draw a rectangle
+
+use help <command> for more detailed help on a specific command
+
+long parameter names are case-sensitive
+short parameter names are not case-sensitive
+command names are not case-sensitive

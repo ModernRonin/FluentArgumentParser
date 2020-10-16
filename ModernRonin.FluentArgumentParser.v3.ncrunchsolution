@@ -1,0 +1,11 @@
+﻿<SolutionConfiguration>
+  <Settings>
+    <AllowParallelTestExecution>True</AllowParallelTestExecution>
+    <FilesExcludedFromAutoBuild>
+      <Value>*.received.*</Value>
+    </FilesExcludedFromAutoBuild>
+    <InstrumentationMode>Optimised</InstrumentationMode>
+    <NCrunchCacheStoragePath>%TMP%\NCrunchCache</NCrunchCacheStoragePath>
+    <SolutionConfigured>True</SolutionConfigured>
+  </Settings>
+</SolutionConfiguration>

@@ -1,0 +1,16 @@
+source https://api.nuget.org/v3/index.json
+
+storage: none
+framework: auto-detect
+
+nuget FluentValidation
+nuget JetBrains.Annotations
+nuget MoreLinq
+
+# testing
+nuget NUnit
+nuget NUnit3TestAdapter
+nuget Microsoft.NET.Test.Sdk
+nuget NSubstitute
+nuget FluentAssertions
+nuget ApprovalTests
