@@ -4,16 +4,16 @@ draw a rectangle
 
 Required arguments:
 --x, -x  the x-coordinate
-         integer
+         int
 --y, -y  the y-coordinate
-         integer
+         int
 
 Optional arguments:
 --long-side, -ls   the long side of the rectangle
-                   integer
+                   int
                    default: 100
 --short-side, -ss  the short side of the rectangle
-                   integer
+                   int
                    default: 50
 --filling, -f      how to fill the rectangle
                    None, Hatched, Solid

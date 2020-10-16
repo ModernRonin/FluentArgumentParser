@@ -4,16 +4,16 @@ Draws a rectangle.
 
 Required arguments:
 --x, -x  the x-coordinate
-         integer
+         int
 --y, -y  the y-coordinate
-         integer
+         int
 
 Optional arguments:
 --width, -w   the width
-              integer
+              int
               default: 10
 --height, -h  the height
-              integer
+              int
               default: 20
 --color, -c   the color to use
               Red, Green, Blue

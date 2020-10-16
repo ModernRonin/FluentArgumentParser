@@ -2,7 +2,7 @@
 
 
 Required arguments:
---name, -n  String
+--name, -n  string
 
 Flags:
 --dont-publish, -d  

@@ -2,13 +2,13 @@
 
 
 Required arguments:
---x, -x  integer
---y, -y  integer
+--x, -x  int
+--y, -y  int
 
 Optional arguments:
---width, -w   integer
+--width, -w   int
               default: 10
---height, -h  integer
+--height, -h  int
               default: 20
 --color, -c   Red, Green, Blue
               default: Green

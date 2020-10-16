@@ -7,13 +7,23 @@ namespace ModernRonin.FluentArgumentParser.Extensibility
     {
         readonly Dictionary<Type, string> _primitivesToNames = new Dictionary<Type, string>
         {
-            [typeof(int)] = "integer",
-            [typeof(string)] = "text"
+            [typeof(string)] = "string",
+            [typeof(byte)] = "byte",
+            [typeof(sbyte)] = "sbyte",
+            [typeof(int)] = "int",
+            [typeof(uint)] = "uint",
+            [typeof(short)] = "short",
+            [typeof(ushort)] = "ushort",
+            [typeof(long)] = "long",
+            [typeof(ulong)] = "ulong",
+            [typeof(float)] = "float",
+            [typeof(double)] = "double",
+            [typeof(decimal)] = "decimal"
         };
 
         protected override string Format(Type type)
         {
-            if (type.IsPrimitive) return _primitivesToNames[type];
+            if (_primitivesToNames.ContainsKey(type)) return _primitivesToNames[type];
             if (type.IsEnum) return string.Join(", ", Enum.GetNames(type));
             return type.Name;
         }

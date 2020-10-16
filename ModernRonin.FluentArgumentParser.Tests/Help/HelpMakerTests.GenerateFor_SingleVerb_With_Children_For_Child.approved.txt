@@ -4,7 +4,7 @@ consume by drinking
 
 Required arguments:
 --drink, -d  the drink to drink
-             String
+             string
 
 Examples:
 cooltool drink alpha
