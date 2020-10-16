@@ -5,7 +5,7 @@ using ModernRonin.FluentArgumentParser.Help;
 
 namespace ModernRonin.FluentArgumentParser.Parsing
 {
-    public class BindingCommandLineParser
+    public class BindingCommandLineParser : IBindingCommandLineParser
     {
         readonly IVerbFactory _factory;
         readonly IHelpAndErrorInterpreter _helpAndErrorInterpreter;
@@ -27,12 +27,6 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             var result = _factory.MakeLeafBinding<T>();
             Add(result);
             return result;
-        }
-
-        void Add(IVerbBinding result)
-        {
-            _verbBindings.Add(result);
-            _parser.Add(result.Verb);
         }
 
         public ILeafVerbBinding<T> DefaultVerb<T>() where T : new()
@@ -72,6 +66,12 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             }
 
             HelpResult help() => _helpAndErrorInterpreter.Interpret(call, _parser);
+        }
+
+        void Add(IVerbBinding result)
+        {
+            _verbBindings.Add(result);
+            _parser.Add(result.Verb);
         }
     }
 }

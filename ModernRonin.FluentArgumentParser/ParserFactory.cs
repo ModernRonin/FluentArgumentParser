@@ -7,7 +7,7 @@ namespace ModernRonin.FluentArgumentParser
 {
     public static class ParserFactory
     {
-        public static BindingCommandLineParser
+        public static IBindingCommandLineParser
             Create(string applicationName, string applicationDescription) =>
             Create(new ParserConfiguration
             {
@@ -15,22 +15,22 @@ namespace ModernRonin.FluentArgumentParser
                 ApplicationDescription = applicationDescription
             });
 
-        public static BindingCommandLineParser Create(ParserConfiguration configuration) =>
+        public static IBindingCommandLineParser Create(ParserConfiguration configuration) =>
             Create(configuration, new DefaultNamingStrategy());
 
-        public static BindingCommandLineParser Create(ParserConfiguration configuration,
+        public static IBindingCommandLineParser Create(ParserConfiguration configuration,
             INamingStrategy namingStrategy) =>
             Create(configuration, namingStrategy, new DefaultTypeFormatter(),
                 new DefaultExampleValueProvider());
 
-        public static BindingCommandLineParser Create(ParserConfiguration configuration,
+        public static IBindingCommandLineParser Create(ParserConfiguration configuration,
             INamingStrategy namingStrategy,
             ITypeFormatter typeFormatter,
             IExampleValueProvider exampleValueProvider) =>
             Create(namingStrategy, typeFormatter, exampleValueProvider,
                 new CommandLineParser {Configuration = configuration});
 
-        public static BindingCommandLineParser Create(INamingStrategy namingStrategy,
+        public static IBindingCommandLineParser Create(INamingStrategy namingStrategy,
             ITypeFormatter typeFormatter,
             IExampleValueProvider exampleValueProvider,
             ICommandLineParser parser) =>
