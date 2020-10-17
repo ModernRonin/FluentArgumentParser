@@ -257,8 +257,33 @@
                 You will never have to directly work this interface, but you will work with extension methods on it.
             </summary>
         </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding.Bindings">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding.Create(ModernRonin.FluentArgumentParser.Parsing.VerbCall)">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
         <member name="T:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding`1">
             <inheritdoc cref="T:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding" />
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Parsing.IVerbBinding.Verb">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Parsing.IVerbBinding.ThisAndChildren">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.IVerbBinding.Bind">
+            <summary>
+                Internal use only.
+            </summary>
         </member>
         <member name="T:ModernRonin.FluentArgumentParser.Parsing.ParameterBindingConfigurer`1">
             <summary>

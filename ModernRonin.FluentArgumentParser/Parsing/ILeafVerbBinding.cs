@@ -7,7 +7,14 @@ namespace ModernRonin.FluentArgumentParser.Parsing
     /// </summary>
     public interface ILeafVerbBinding : IVerbBinding
     {
+        /// <summary>
+        ///     Internal use only.
+        /// </summary>
         IEnumerable<IPropertyParameterBinding> Bindings { get; }
+
+        /// <summary>
+        ///     Internal use only.
+        /// </summary>
         object Create(VerbCall call);
     }
 
