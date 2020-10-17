@@ -29,7 +29,7 @@ NUGET
     FluentAssertions (5.10.3)
       System.Configuration.ConfigurationManager (>= 4.4)
     FluentValidation (9.2.2)
-    Microsoft.Build.Tasks.Git (1.0) - copy_local: false
+    Microsoft.Build.Tasks.Git (1.0) - copy_local: true
     Microsoft.CodeCoverage (16.7.1)
     Microsoft.DotNet.InternalAbstractions (1.0)
       System.AppContext (>= 4.1)
@@ -46,8 +46,8 @@ NUGET
       Microsoft.TestPlatform.TestHost (>= 16.7.1)
     Microsoft.NETCore.Platforms (3.1.3)
     Microsoft.NETCore.Targets (3.1)
-    Microsoft.SourceLink.Common (1.0) - copy_local: false
-    Microsoft.SourceLink.GitHub (1.0) - copy_local: false
+    Microsoft.SourceLink.Common (1.0) - copy_local: true
+    Microsoft.SourceLink.GitHub (1.0) - copy_local: true
       Microsoft.Build.Tasks.Git (>= 1.0)
       Microsoft.SourceLink.Common (>= 1.0)
     Microsoft.TestPlatform.ObjectModel (16.7.1)

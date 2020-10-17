@@ -15,4 +15,4 @@ nuget FluentAssertions
 nuget ApprovalTests
 
 # SourceLink
-nuget Microsoft.SourceLink.GitHub copy_local: false
+nuget Microsoft.SourceLink.GitHub copy_local: true
