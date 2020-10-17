@@ -43,6 +43,7 @@ namespace ModernRonin.FluentArgumentParser.Parsing
                 {
                     IsHelpRequest = true,
                     Verb = helpTargetVerb,
+                    IsDefaultVerb = helpTargetVerb == DefaultVerb,
                     UnknownVerb = rest.Length == 0 ? default : string.Join(' ', rest)
                 };
             }
@@ -58,7 +59,11 @@ namespace ModernRonin.FluentArgumentParser.Parsing
                 };
             }
 
-            var result = new VerbCall {Verb = leafVerb};
+            var result = new VerbCall
+            {
+                Verb = leafVerb,
+                IsDefaultVerb = leafVerb == DefaultVerb
+            };
             _verbParser.Parse(Configuration, result,
                 arguments.Select(Configuration.ArgumentPreprocessor.Process).ToArray());
             return result;

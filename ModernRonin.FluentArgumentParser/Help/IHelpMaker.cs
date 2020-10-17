@@ -5,7 +5,7 @@ namespace ModernRonin.FluentArgumentParser.Help
 {
     public interface IHelpMaker
     {
-        string GenerateFor(Verb verb, ParserConfiguration configuration);
+        string GenerateFor(Verb verb, bool isDefaultVerb, ParserConfiguration configuration);
         string GenerateFor(ICommandLineParser parser);
     }
 }

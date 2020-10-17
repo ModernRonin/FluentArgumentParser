@@ -22,6 +22,73 @@ namespace ModernRonin.FluentArgumentParser.Tests.Help
         }
 
         [Test]
+        public void GenerateFor_DefaultVerb()
+        {
+            var verb = new Verb
+            {
+                Name = "rect",
+                HelpText = "Draws a rectangle.",
+                Parameters = new AParameter[]
+                {
+                    new RequiredParameter
+                    {
+                        Index = 1,
+                        LongName = "y",
+                        ShortName = "y",
+                        Type = typeof(int),
+                        HelpText = "the y-coordinate"
+                    },
+                    new RequiredParameter
+                    {
+                        Index = 0,
+                        LongName = "x",
+                        ShortName = "x",
+                        Type = typeof(int),
+                        HelpText = "the x-coordinate"
+                    },
+                    new OptionalParameter
+                    {
+                        Index = 2,
+                        LongName = "width",
+                        ShortName = "w",
+                        Type = typeof(int),
+                        Default = 10,
+                        HelpText = "the width"
+                    },
+                    new OptionalParameter
+                    {
+                        Index = 3,
+                        LongName = "height",
+                        ShortName = "h",
+                        Type = typeof(int),
+                        Default = 20,
+                        HelpText = "the height"
+                    },
+                    new OptionalParameter
+                    {
+                        Index = 4,
+                        LongName = "color",
+                        ShortName = "c",
+                        Type = typeof(Color),
+                        Default = Color.Green,
+                        HelpText = "the color to use"
+                    },
+                    new FlagParameter
+                    {
+                        LongName = "do-fill",
+                        ShortName = "f",
+                        HelpText = "fill the rectangle"
+                    }
+                }
+            };
+            var actual =
+                new HelpMaker().GenerateFor(verb, true,
+                    new ParserConfiguration {ApplicationName = "cooltool"});
+
+            Approvals.Verify(actual);
+        }
+
+        [Test]
         public void GenerateFor_Overview_With_Multiple_Verbs()
         {
             var parser = Substitute.For<ICommandLineParser>();
@@ -116,7 +183,8 @@ namespace ModernRonin.FluentArgumentParser.Tests.Help
                 }
             };
             var actual =
-                new HelpMaker().GenerateFor(verb, new ParserConfiguration {ApplicationName = "cooltool"});
+                new HelpMaker().GenerateFor(verb, false,
+                    new ParserConfiguration {ApplicationName = "cooltool"});
 
             Approvals.Verify(actual);
         }
@@ -175,7 +243,8 @@ namespace ModernRonin.FluentArgumentParser.Tests.Help
                 }
             };
             var actual =
-                new HelpMaker().GenerateFor(verb, new ParserConfiguration {ApplicationName = "cooltool"});
+                new HelpMaker().GenerateFor(verb, false,
+                    new ParserConfiguration {ApplicationName = "cooltool"});
 
             Approvals.Verify(actual);
         }
@@ -222,7 +291,8 @@ namespace ModernRonin.FluentArgumentParser.Tests.Help
             });
 
             var actual =
-                new HelpMaker().GenerateFor(verb, new ParserConfiguration {ApplicationName = "cooltool"});
+                new HelpMaker().GenerateFor(verb, false,
+                    new ParserConfiguration {ApplicationName = "cooltool"});
 
             Approvals.Verify(actual);
         }
@@ -270,7 +340,8 @@ namespace ModernRonin.FluentArgumentParser.Tests.Help
             consume.Add(drink);
 
             var actual =
-                new HelpMaker().GenerateFor(drink, new ParserConfiguration {ApplicationName = "cooltool"});
+                new HelpMaker().GenerateFor(drink, false,
+                    new ParserConfiguration {ApplicationName = "cooltool"});
 
             Approvals.Verify(actual);
         }

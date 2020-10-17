@@ -25,10 +25,14 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             return new HelpResult
             {
                 IsResultOfInvalidInput = true,
-                Text = _helpMaker.GenerateFor(call.Verb, configuration) + Environment.NewLine +
+                Text = HelpFor(call, configuration) +
+                       Environment.NewLine          +
                        argumentErrors
             };
         }
+
+        string HelpFor(VerbCall call, ParserConfiguration configuration) =>
+            _helpMaker.GenerateFor(call.Verb, call.IsDefaultVerb, configuration);
 
         HelpResult MakeHelpResult(VerbCall call, ICommandLineParser parser)
         {
@@ -50,12 +54,13 @@ namespace ModernRonin.FluentArgumentParser.Parsing
                 {
                     IsResultOfInvalidInput = true,
                     Text =
-                        _helpMaker.GenerateFor(call.Verb, parser.Configuration) + Environment.NewLine +
+                        HelpFor(call, parser.Configuration) +
+                        Environment.NewLine                 +
                         $"Unknown verb '{call.UnknownVerb}'"
                 };
             }
 
-            return new HelpResult {Text = _helpMaker.GenerateFor(call.Verb, parser.Configuration)};
+            return new HelpResult {Text = HelpFor(call, parser.Configuration)};
         }
     }
 }

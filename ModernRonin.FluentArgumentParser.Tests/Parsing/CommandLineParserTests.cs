@@ -94,7 +94,11 @@ namespace ModernRonin.FluentArgumentParser.Tests.Parsing
 
             _underTest.Parse("-x=10 -y=20".Split())
                 .Should()
-                .BeEquivalentTo(new VerbCall {Verb = _underTest.DefaultVerb});
+                .BeEquivalentTo(new VerbCall
+                {
+                    Verb = _underTest.DefaultVerb,
+                    IsDefaultVerb = true
+                });
 
             _verbParser.Received()
                 .Parse(_underTest.Configuration,

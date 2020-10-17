@@ -20,13 +20,27 @@ namespace ModernRonin.FluentArgumentParser.Tests.Parsing
             _parser.Configuration.Returns(new ParserConfiguration());
 
             _helpMaker.GenerateFor(_parser).Returns("overview");
-            _helpMaker.GenerateFor(_verb, _parser.Configuration).Returns("verbhelp");
+            _helpMaker.GenerateFor(_verb, false, _parser.Configuration).Returns("verbhelp");
+            _helpMaker.GenerateFor(_verb, true, _parser.Configuration).Returns("defaultverbhelp");
         }
 
         IHelpMaker _helpMaker;
         HelpAndErrorInterpreter _underTest;
         ICommandLineParser _parser;
         readonly Verb _verb = new Verb();
+
+        [Test]
+        public void Call_IsDefaultVerb_is_passed_on_to_helpmaker()
+        {
+            _underTest.Interpret(new VerbCall
+                {
+                    IsDefaultVerb = true,
+                    IsHelpRequest = true,
+                    Verb = _verb
+                }, _parser)
+                .Should()
+                .BeEquivalentTo(new HelpResult {Text = "defaultverbhelp"});
+        }
 
         [Test]
         public void GetHelpOverview_delegates_to_helpMaker() =>

@@ -23,7 +23,7 @@ namespace ModernRonin.FluentArgumentParser.Help
             _exampleValues = exampleValues;
         }
 
-        public string GenerateFor(Verb verb, ParserConfiguration configuration)
+        public string GenerateFor(Verb verb, bool isDefaultVerb, ParserConfiguration configuration)
         {
             _buffer.Clear();
             if (verb.Any())
@@ -34,7 +34,7 @@ namespace ModernRonin.FluentArgumentParser.Help
                     LineFeed();
                 });
             }
-            else Format(verb, configuration);
+            else Format(verb, configuration, isDefaultVerb);
 
             return _buffer.ToString();
         }
@@ -49,7 +49,7 @@ namespace ModernRonin.FluentArgumentParser.Help
             Line(configuration.ApplicationDescription);
             LineFeed();
             Line("Usage:");
-            if (parser.DefaultVerb != default) Format(parser.DefaultVerb, configuration);
+            if (parser.DefaultVerb != default) Format(parser.DefaultVerb, configuration, true);
             else VerbList(appName, parser);
 
             LineFeed();
@@ -64,7 +64,7 @@ namespace ModernRonin.FluentArgumentParser.Help
             string not(bool flag) => flag ? string.Empty : "not ";
         }
 
-        void Format(Verb verb, ParserConfiguration configuration)
+        void Format(Verb verb, ParserConfiguration configuration, bool isDefaultVerb)
         {
             (RequiredParameter[], OptionalParameter[], FlagParameter[]) groupAndSort() =>
                 (verb.Parameters.OfType<RequiredParameter>().OrderBy(p => p.Index).ToArray(),
@@ -78,6 +78,7 @@ namespace ModernRonin.FluentArgumentParser.Help
                 container switch
                 {
                     CommandLineParser _ => configuration.ApplicationName,
+                    Verb _ when isDefaultVerb => configuration.ApplicationName,
                     Verb v when v.Parent == default => $"{configuration.ApplicationName} {v.Name}",
                     Verb v => verbName(v.Parent) + " " + v.Name,
                     _ => throw new NotImplementedException()

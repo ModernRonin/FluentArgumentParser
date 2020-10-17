@@ -1,8 +1,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Version>0.1.0</Version>
+    <Version>0.3.0</Version>
     <PackageReleaseNotes>
-0.1.0
+0.3.0
     initial nuget release
     </PackageReleaseNotes>
 	  <!-- make MSBuild track this file for incremental builds. -->
