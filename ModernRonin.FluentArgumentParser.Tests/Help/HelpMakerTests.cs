@@ -330,10 +330,10 @@ namespace ModernRonin.FluentArgumentParser.Tests.Help
                     new RequiredParameter
                     {
                         Index = 0,
-                        LongName = "drink",
-                        ShortName = "d",
+                        LongName = "beverage",
+                        ShortName = "b",
                         Type = typeof(string),
-                        HelpText = "the drink to drink"
+                        HelpText = "the beverage to drink"
                     }
                 }
             };

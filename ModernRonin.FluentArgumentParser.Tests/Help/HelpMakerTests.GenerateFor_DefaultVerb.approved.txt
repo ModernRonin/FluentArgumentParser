@@ -23,8 +23,8 @@ Flags:
 --do-fill, -f  fill the rectangle
 
 Examples:
-cooltool rect 10 20
-cooltool rect 10 20 30 40 Blue --do-fill
-cooltool rect --x=10 --y=20 --width=30 --height=40 --color=Blue --do-fill
-cooltool rect -x=10 -y=20 -w=30 -h=40 -c=Blue -f
-cooltool rect -h=40 -c=Blue -f -x=10 -y=20 -w=30
+cooltool 10 20
+cooltool 10 20 30 40 Blue --do-fill
+cooltool --x=10 --y=20 --width=30 --height=40 --color=Blue --do-fill
+cooltool -x=10 -y=20 -w=30 -h=40 -c=Blue -f
+cooltool -h=40 -c=Blue -f -x=10 -y=20 -w=30

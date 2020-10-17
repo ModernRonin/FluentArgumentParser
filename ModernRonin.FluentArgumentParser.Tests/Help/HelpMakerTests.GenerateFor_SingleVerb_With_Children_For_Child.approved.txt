@@ -1,12 +1,12 @@
-﻿cooltool consume drink --drink=<value>
+﻿cooltool consume drink --beverage=<value>
 
 consume by drinking
 
 Required arguments:
---drink, -d  the drink to drink
-             string
+--beverage, -b  the beverage to drink
+                string
 
 Examples:
-cooltool drink alpha
-cooltool drink --drink=alpha
-cooltool drink -d=alpha
+cooltool consume drink alpha
+cooltool consume drink --beverage=alpha
+cooltool consume drink -b=alpha

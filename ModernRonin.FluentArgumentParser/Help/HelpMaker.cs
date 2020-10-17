@@ -124,7 +124,7 @@ namespace ModernRonin.FluentArgumentParser.Help
                     example(Method.ByShortName),
                     example(Method.ByShortName, doRandomize: true)
                 }.Select(e => string.Join(" ", e))
-                .Select(e => $"{configuration.ApplicationName} {verb.Name} {e}")
+                .Select(e => $"{verbName(verb)} {e}")
                 .Distinct()
                 .ForEach(Line);
 
