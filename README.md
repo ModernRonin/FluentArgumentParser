@@ -15,11 +15,9 @@ So what are these requirements?
 * possible to work with just the POCOs and not further configuration - for small in-house tools one often doesn't want to spend a lot of time with setting up these options
 * good defaults, but at the same time configurable and extensible
 
-## Quick Starts
-The usual preamble: install `ModernRonin.FluentArgumentParser` from nuget.
+## Quick Start - zero configuration
 
-### Zero Configuration, just arguments
-You want to model a single action and don't care too much about the names of the options or help-text, you just want to get over this argument parsing as quickly as possible.
+*Scenario:* You want to model a single action and don't care too much about the names of the options or help-text, you just want to get over this argument parsing as quickly as possible.
 
 
 ```csharp
@@ -55,6 +53,37 @@ Now what are valid inputs for this setup? Here are a few examples, together with
 | `10 11 -h=13 -w=12 --filling=Hatched`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
 | `-x=10 -y=11 -h=13 -w=12 Hatched`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
 
+And what would be the content of the `help.Text` property in the code-sample above?
+
+```plaintext
+sometool
+somedescription
+
+Usage:
+sometool --x=<value> --y=<value> --width=<value> --height=<value> [--filling=<value>]
+
+
+Required arguments:
+--x, -x       int
+--y, -y       int
+--width, -w   int
+--height, -h  int
+
+Optional arguments:
+--filling, -f  None, Hatched, Solid
+               default: Solid
+
+Examples:
+sometool 10 20 30 40
+sometool 10 20 30 40 Solid
+sometool --x=10 --y=20 --width=30 --height=40 --filling=Solid
+sometool -x=10 -y=20 -w=30 -h=40 -f=Solid
+sometool -h=40 -f=Solid -x=10 -y=20 -w=30
+
+long parameter names are case-sensitive
+short parameter names are not case-sensitive
+command names are not case-sensitive
+```
 
 
 ## Customizability
