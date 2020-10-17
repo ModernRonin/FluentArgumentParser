@@ -3,7 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Modern Ronin</Authors>
-    <Description>Parse command-line args with a simple, yet complete and elegant fluent API</Description>
+    <Description>Parse command-line args directly into your POCOs with a simple, yet complete and elegant fluent API</Description>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!--<IncludeSymbols>true</IncludeSymbols> commented out until paket fixes https://github.com/fsprojects/Paket/issues/3685
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
+    <RepositoryUrl>https://github.com/ModernRonin/FluentArgumentParser.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/ModernRonin/FluentArgumentParser</PackageProjectUrl>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
