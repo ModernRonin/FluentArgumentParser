@@ -15,8 +15,38 @@ So what are these requirements?
 * possible to work with just the POCOs and not further configuration - for small in-house tools one often doesn't want to spend a lot of time with setting up these options
 * good defaults, but at the same time configurable and extensible
 
-## Quick Start
+## Quick Starts
+The usual preamble: install `ModernRonin.FluentArgumentParser` from nuget.
+
+### Zero Configuration, just arguments
+You want to model a single action and don't care too much about the names of the options or help-text, you just want to get over this argument parsing as quickly as possible.
+
+
 ```csharp
+// this is the info you want to get from the commandline arguments - you just define it as a regular POCO
+public class Rectangle
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public Filling Filling { get; set; } = Filling.Solid;
+}
+
+// and in your Main you do:
+static int Main(string[] args)
+{
+    var parser = ParserFactory.Create("sometool", "somedescription");
+    parser.DefaultVerb<Rectangle>();
+    switch (parser.Parse(args))
+    {
+        case HelpResult help:
+            Console.WriteLine(help.Text);
+            return help.IsResultOfInvalidInput ? -1 : 0;
+        case Rectangle rectangle:
+            // do whatever you need to do
+    }
+}
 
 ```
 
