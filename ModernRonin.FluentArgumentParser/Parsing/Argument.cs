@@ -9,6 +9,5 @@ namespace ModernRonin.FluentArgumentParser.Parsing
         public bool WasPositionalMatch { get; set; }
         public bool IsValid => Error == default;
         public string Error { get; set; }
-        public bool WasSuperfluous => WasPositionalMatch && Parameter == default;
     }
 }
