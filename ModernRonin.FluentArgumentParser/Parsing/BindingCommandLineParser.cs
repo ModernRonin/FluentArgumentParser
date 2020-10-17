@@ -22,6 +22,8 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             _helpAndErrorInterpreter = helpAndErrorInterpreter;
         }
 
+        public string HelpOverview => _helpAndErrorInterpreter.GetHelpOverview(_parser);
+
         public ILeafVerbBinding<T> AddVerb<T>() where T : new()
         {
             var result = _factory.MakeLeafBinding<T>();

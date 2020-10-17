@@ -25,6 +25,11 @@ namespace ModernRonin.FluentArgumentParser.Parsing
     public interface IBindingCommandLineParser
     {
         /// <summary>
+        ///     Gets the overview help text, in case you need to display it without the user providing any input yet.
+        /// </summary>
+        string HelpOverview { get; }
+
+        /// <summary>
         ///     Use this if your app supports verbs. The type parameter is a regular POCO. Use the return value to further
         ///     customize how FluentArgumentParser treats this verb.
         /// </summary>

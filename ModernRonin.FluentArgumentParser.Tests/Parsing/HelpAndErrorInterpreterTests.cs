@@ -29,6 +29,10 @@ namespace ModernRonin.FluentArgumentParser.Tests.Parsing
         readonly Verb _verb = new Verb();
 
         [Test]
+        public void GetHelpOverview_delegates_to_helpMaker() =>
+            _underTest.GetHelpOverview(_parser).Returns("overview");
+
+        [Test]
         public void HasError_returns_verb_help_and_errors()
         {
             _underTest.Interpret(new VerbCall

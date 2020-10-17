@@ -17,6 +17,8 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             return call.HasError ? ForBadArguments(call, parser.Configuration) : default;
         }
 
+        public string GetHelpOverview(ICommandLineParser parser) => _helpMaker.GenerateFor(parser);
+
         HelpResult ForBadArguments(VerbCall call, ParserConfiguration configuration)
         {
             var argumentErrors = string.Join(Environment.NewLine, call.Arguments.Select(a => a.Error));

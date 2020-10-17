@@ -145,6 +145,14 @@ namespace ModernRonin.FluentArgumentParser.Tests.Parsing
         }
 
         [Test]
+        public void HelpOverview_delegates_to_interpreter()
+        {
+            _helpInterpreter.GetHelpOverview(_parser).Returns("overview overview");
+
+            _underTest.HelpOverview.Should().Be("overview overview");
+        }
+
+        [Test]
         public void Parse_Returns_Filled_Object_For_DefaultVerb()
         {
             _underTest.AddVerb<Rectangle>();
