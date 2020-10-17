@@ -5,6 +5,9 @@
     <Authors>Modern Ronin</Authors>
     <Description>Parse command-line args directly into your POCOs with a simple, yet complete and elegant fluent API</Description>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- uncomment the next two lines once paket supports snupkg -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <!--<IncludeSymbols>true</IncludeSymbols> commented out until paket fixes https://github.com/fsprojects/Paket/issues/3685
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
     <RepositoryUrl>https://github.com/ModernRonin/FluentArgumentParser.git</RepositoryUrl>
