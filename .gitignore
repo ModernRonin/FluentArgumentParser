@@ -298,3 +298,5 @@ paket-files/
 #Resharper
 _ReSharper.Caches
 *.received.txt
+
+tmp/
