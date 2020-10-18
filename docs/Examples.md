@@ -1,5 +1,6 @@
 # Examples
-Here are a few examples, moving from low complexity and customization to high complexity and customization.
+FluentArgumentParser allows you to gradually change your tradeoff between complexity and customization. The following examples follow along this trajectory, moving from minimal effort (and minimal customization) to  high effort (comparably). 
+
 
 You can also check out the [demo tests](../ModernRonin.FluentArgumentParser.Tests/Demo).
 
