@@ -159,3 +159,94 @@ sometool startfeature alpha --dont-publish
 sometool startfeature --name=alpha --dont-publish
 sometool startfeature -n=alpha -d
 ```
+
+## Multiple and nested verbs, no configuration
+> Now you need some of your actions/commands/verbs to form a nested hierarchy, but you still don't care too much about the names of the options or help-text.
+
+
+### Code
+```csharp
+static int Main(string[] args)
+{
+    var parser = ParserFactory.Create("sometool", "somedescription");
+    var feature = parser.AddContainerVerb<FeatureCommand>();
+    feature.AddVerb<StartFeature>();
+    feature.AddVerb<PublishFeature>();
+    parser.AddVerb<DrawRectangle>();
+
+    switch (parser.Parse(args))
+    {
+        case HelpResult help:
+            Console.WriteLine(help.Text);
+            return help.IsResultOfInvalidInput ? -1 : 0;
+        case DrawRectangle rectangle:
+            // do whatever you need to do
+        case PublishFeature publish:
+            // do whatever you need to do
+        case StartFeature start:
+            // do whatever you need to do
+    }
+}
+```
+A few notes:
+- verbs can be arbitratily nested, even though the example shows just one level of nesting.
+- you don't need to match for `FeatureCommand` because it is not an actual command, just a container for commands
+- as you can see in the definitions of the POCOs further above, `FeatureCommand` happens to be a common base class of `StartFeature` and `PublishFeature`. This is not required and just coincidence. What is required, however, that all base-classes of your verbs are concrete (not `abstract`) and default-constructable. The reason for this has to do with how we detect default values. 
+
+### Inputs and results
+| Argument string  | Return value of Parse |
+| --- | --- |
+| featurecommand startfeature MyFeature | `new StartFeature {Name = "MyFeature"}` |
+| drawrectangle 10 11 12 13 | `new DrawRectangle  { X = 10, Y = 11, Width = 12, Height = 13}` |
+
+As you can see, we are now entering territory where the automatically generated names don't look very nice. Instead of 'featurecommand startfeature MyFeature', users probably want to enter 'feature start MyFeature'. 
+
+There are two ways how you can achieve that: one is to just rename your types accordingly (`FeatureCommand` ==> `Feature` and `StartFeature` ==> `Start`). The alternative will be shown in the examples with configuration further down.
+
+### Help
+#### Overview
+```plaintext
+sometool
+somedescription
+
+Usage:
+sometool featurecommand | drawrectangle [command specific options]
+
+Available commands:
+featurecommand  
+drawrectangle   
+
+use help <command> for more detailed help on a specific command
+
+long parameter names are case-sensitive
+short parameter names are not case-sensitive
+command names are not case-sensitive
+```
+#### Help for `featurecommand`
+```plaintext
+sometool featurecommand startfeature | publishfeature [command specific options]
+
+
+Available commands:
+startfeature    
+publishfeature  
+
+use help <command> for more detailed help on a specific command
+```
+#### Help for `featurecommand startfeature`
+```plaintext
+sometool featurecommand startfeature --name=<value> [--dont-publish]
+
+
+Required arguments:
+--name, -n  string
+
+Flags:
+--dont-publish, -d  
+
+Examples:
+sometool featurecommand startfeature alpha
+sometool featurecommand startfeature alpha --dont-publish
+sometool featurecommand startfeature --name=alpha --dont-publish
+sometool featurecommand startfeature -n=alpha -d
+```
