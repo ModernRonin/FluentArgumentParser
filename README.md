@@ -20,8 +20,10 @@ What are these requirements?
 * good defaults, but at the same time configurable and extensible
 
 ## Quick Start - zero configuration
+Let's look at the simplest scenario. For more advanced examples, take a look [here](docs/Examples.md).
 
-*Scenario:* You want to model a single action and don't care too much about the names of the options or help-text, you just want to get over this argument parsing as quickly as possible.
+
+>You want to model a single action and don't care too much about the names of the options or help-text, you just want to get over this argument parsing as quickly as possible.
 
 
 ```csharp
@@ -52,7 +54,7 @@ static int Main(string[] args)
 ```
 Now what are valid inputs for this setup? Here are a few examples, together with how they will fill the properties of the `Rectangle` instance:
 | Argument string  | Rectangle properties |
-| ------------- | ------------- |
+| --- | --- |
 | `10 11 12 13`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Solid `  |
 | `10 11 -h=13 -w=12 --filling=Hatched`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
 | `-x=10 -y=11 -h=13 -w=12 Hatched`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
