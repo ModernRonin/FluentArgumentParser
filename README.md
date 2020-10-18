@@ -61,9 +61,9 @@ static int Main(string[] args)
 Now what are valid inputs for this setup? Here are a few examples, together with how they will fill the properties of the `Rectangle` instance:
 | Argument string  | Rectangle properties |
 | --- | --- |
-| `10 11 12 13`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Solid `  |
-| `10 11 -h=13 -w=12 --filling=Hatched`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
-| `-x=10 -y=11 -h=13 -w=12 Hatched`  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
+| 10 11 12 13  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Solid `  |
+| 10 11 -h=13 -w=12 --filling=Hatched  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
+| -x=10 -y=11 -h=13 -w=12 Hatched  | `X:10, Y:11, Width:12, Height:13, Filling:Filling.Hatched `  |
 
 And what would be the content of the `help.Text` property in the code-sample above?
 
