@@ -268,15 +268,12 @@ var feature = parser.AddContainerVerb<FeatureCommand>()
     .Rename("feature")
     .WithHelp("work with feature branches");
 var startFeature = feature.AddVerb<StartFeature>()
-    .Rename("start")
-    .WithHelp("create a new feature branch");
+                          .Rename("start")
+                          .WithHelp("create a new feature branch");
 startFeature.Parameter(s => s.DontPublish).WithHelp("don't publish the branch to remote");
 startFeature.Parameter(s => s.Name).WithHelp("the name of the branch");
-feature.AddVerb<PublishFeature>()
-    .Rename("publish")
-    .WithHelp("create a PR from a feature branch")
-    .Parameter(s => s.Name)
-    .WithHelp("the name of the branch");
+feature.AddVerb<PublishFeature>().Rename("publish").WithHelp("create a PR from a feature branch")
+       .Parameter(s => s.Name).WithHelp("the name of the branch");
 var rect = parser.AddVerb<DrawRectangle>().Rename("rect").WithHelp("draw a rectangle");
 rect.Parameter(r => r.Width)
     .MakeOptional()
