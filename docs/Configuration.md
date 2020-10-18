@@ -1,5 +1,5 @@
 # Configuration
-Say you don't like long parameter names being prefixed with `--` or that verb names being case-insensitive. 
+Say you don't like long parameter names being prefixed with `--` or that verb names are case-insensitive. 
 In that case, you want to supply a custom `ParserConfiguration` to `ParserFactory.Create()`:
 
 ```csharp
