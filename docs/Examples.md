@@ -124,7 +124,7 @@ static int Main(string[] args)
 | help startfeature | `HelpResult` with help for `StartFeature` |
 
 ### Generated help
-#### Overview
+#### `help`
 ```plaintext
 sometool
 somedescription
@@ -143,7 +143,7 @@ long parameter names are case-sensitive
 short parameter names are not case-sensitive
 command names are not case-sensitive
 ```
-#### For a specific verb
+#### `help startfeature`
 ```plaintext
 sometool startfeature --name=<value> [--dont-publish]
 
@@ -205,7 +205,7 @@ As you can see, we are now entering territory where the automatically generated 
 There are two ways how you can achieve that: one is to just rename your types accordingly (`FeatureCommand` ==> `Feature` and `StartFeature` ==> `Start`). The alternative will be shown in the examples with configuration further down.
 
 ### Help
-#### Overview
+#### `help`
 ```plaintext
 sometool
 somedescription
@@ -223,7 +223,7 @@ long parameter names are case-sensitive
 short parameter names are not case-sensitive
 command names are not case-sensitive
 ```
-#### Help for `featurecommand`
+#### `help featurecommand`
 ```plaintext
 sometool featurecommand startfeature | publishfeature [command specific options]
 
@@ -234,7 +234,7 @@ publishfeature
 
 use help <command> for more detailed help on a specific command
 ```
-#### Help for `featurecommand startfeature`
+#### `help featurecommand startfeature`
 ```plaintext
 sometool featurecommand startfeature --name=<value> [--dont-publish]
 
@@ -251,3 +251,138 @@ sometool featurecommand startfeature alpha --dont-publish
 sometool featurecommand startfeature --name=alpha --dont-publish
 sometool featurecommand startfeature -n=alpha -d
 ```
+
+## Multiple and nested verbs, with additional configuration
+> Now what if you *do* care about help texts and also don't want to accept the default names and other settings detected by FluentArgumentParser?
+
+
+### Code
+```csharp
+var parser = ParserFactory.Create(new ParserConfiguration
+{
+    ApplicationName = "coolTool",
+    ApplicationDescription = "this super-duper tool serves as a demo for the help generation"
+});
+
+var feature = parser.AddContainerVerb<FeatureCommand>()
+    .Rename("feature")
+    .WithHelp("work with feature branches");
+var startFeature = feature.AddVerb<StartFeature>()
+    .Rename("start")
+    .WithHelp("create a new feature branch");
+startFeature.Parameter(s => s.DontPublish).WithHelp("don't publish the branch to remote");
+startFeature.Parameter(s => s.Name).WithHelp("the name of the branch");
+feature.AddVerb<PublishFeature>()
+    .Rename("publish")
+    .WithHelp("create a PR from a feature branch")
+    .Parameter(s => s.Name)
+    .WithHelp("the name of the branch");
+var rect = parser.AddVerb<DrawRectangle>().Rename("rect").WithHelp("draw a rectangle");
+rect.Parameter(r => r.Width)
+    .MakeOptional()
+    .WithDefault(100)
+    .WithShortName("ls")
+    .WithLongName("long-side")
+    .WithHelp("the long side of the rectangle");
+rect.Parameter(r => r.Height)
+    .MakeOptional()
+    .WithDefault(50)
+    .WithShortName("ss")
+    .WithLongName("short-side")
+    .WithHelp("the short side of the rectangle");
+rect.Parameter(r => r.X).WithHelp("the x-coordinate");
+rect.Parameter(r => r.Y).WithHelp("the y-coordinate");
+rect.Parameter(r => r.Filling).WithHelp("how to fill the rectangle");
+```
+
+This example leaves out the part of dealing with the parse-result because there's really no change there. 
+
+Things to note:
+- the return values of `.AddContainerVerb`, `.AddVerb` and `.DefaultVerb` allow to further customize a verb and its parameters via a fluent API
+- you can rename verbs with `.Rename()`
+- you can make parameters optional that were recognized as required (because they have not explicit default value set that is different from their type's `default`) with `.MakeOptional()`
+- you can change the default value of optional parameters with `.WithDefault.()`
+- you can change short and long parameters names with `.WithShortName()` and `.WithLongName()` respectively
+- you can set help texts for verbs and parameters with `.WithHelp()` - see the next section for how this is used
+
+### Help
+#### `help`
+```plaintext
+coolTool
+this super-duper tool serves as a demo for the help generation
+
+Usage:
+coolTool feature | rect [command specific options]
+
+Available commands:
+feature  work with feature branches
+rect     draw a rectangle
+
+use help <command> for more detailed help on a specific command
+
+long parameter names are case-sensitive
+short parameter names are not case-sensitive
+command names are not case-sensitive
+```
+#### `help feature`
+```plaintext
+coolTool feature start | publish [command specific options]
+
+work with feature branches
+
+Available commands:
+start    create a new feature branch
+publish  create a PR from a feature branch
+
+use help <command> for more detailed help on a specific command
+```
+#### `help feature start`
+```plaintext
+coolTool feature start --name=<value> [--dont-publish]
+
+create a new feature branch
+
+Required arguments:
+--name, -n  the name of the branch
+            string
+
+Flags:
+--dont-publish, -d  don't publish the branch to remote
+
+Examples:
+coolTool feature start alpha
+coolTool feature start alpha --dont-publish
+coolTool feature start --name=alpha --dont-publish
+coolTool feature start -n=alpha -d
+```
+#### Help for `rect`
+```plaintext
+coolTool rect --x=<value> --y=<value> [--long-side=<value>] [--short-side=<value>] [--filling=<value>]
+
+draw a rectangle
+
+Required arguments:
+--x, -x  the x-coordinate
+         int
+--y, -y  the y-coordinate
+         int
+
+Optional arguments:
+--long-side, -ls   the long side of the rectangle
+                   int
+                   default: 100
+--short-side, -ss  the short side of the rectangle
+                   int
+                   default: 50
+--filling, -f      how to fill the rectangle
+                   None, Hatched, Solid
+                   default: Solid
+
+Examples:
+coolTool rect 50 60
+coolTool rect 50 60 70 80 Solid
+coolTool rect --x=50 --y=60 --long-side=70 --short-side=80 --filling=Solid
+coolTool rect -x=50 -y=60 -ls=70 -ss=80 -f=Solid
+coolTool rect -ss=80 -f=Solid -x=50 -y=60 -ls=70
+```
+
