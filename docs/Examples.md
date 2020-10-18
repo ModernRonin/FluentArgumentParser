@@ -1,7 +1,7 @@
 # Examples
 Here are a few examples, moving from low complexity and customization to high complexity and customization.
 
-You can also check out the [demo tests](ModernRonin.FluentArgumentParser.Tests\Demo).
+You can also check out the [demo tests](ModernRonin.FluentArgumentParser.Tests/Demo).
 
 All examples use the following POCOs representing configuration objects in your domain:
 ```csharp

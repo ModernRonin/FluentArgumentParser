@@ -115,5 +115,5 @@ see [More Examples](docs/Examples.md).
 - change how [types are formatted](docs/Extensibility.md#itypeformatter) for the help texts
 - change how [example values](docs/Extensibility.md#iexamplevalueprovider) are generated for the help texts
 - [pre-process](docs/Extensibility.md#iargumentpreprocessor) arguments
-- if you want to interact with the low-level parser, without any reflection, check out [these tests](ModernRonin.FluentArgumentParser.Tests\Demo\LowLevelTests.cs)
-- last not least, you can always take a look at the [demo tests](ModernRonin.FluentArgumentParser.Tests\Demo)
+- if you want to interact with the low-level parser, without any reflection, check out [these tests](ModernRonin.FluentArgumentParser.Tests/Demo/LowLevelTests.cs)
+- last not least, you can always take a look at the [demo tests](ModernRonin.FluentArgumentParser.Tests/Demo)
