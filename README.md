@@ -5,6 +5,12 @@
 [![NuGet](https://img.shields.io/nuget/v/ModernRonin.FluentArgumentParser.svg)](https://www.nuget.org/packages/ModernRonin.FluentArgumentParser/)
 [![NuGet](https://img.shields.io/nuget/dt/ModernRonin.FluentArgumentParser.svg)](https://www.nuget.org/packages/ModernRonin.FluentArgumentParser)
 -->
+- [Summary](#summary)
+- [Quickstart](#quick-start---zero-configuration)
+- [More examples](docs/Examples.md)
+- [Advanced Configuration](docs/Configuration)
+- [Extensibility](docs/Extensibility.md)
+- [Release History](docs/ReleaseHistory.md)
 
 ## Summary
 There are several packages out there for parsing of command-line arguments, but not one of them fulfills everything I think such a library should cover. So I just created another one ;-)
@@ -91,10 +97,23 @@ short parameter names are not case-sensitive
 command names are not case-sensitive
 ```
 
+Things to note:
+- if you are fine with the default naming, you can just pop in your configuration objects and be done with it.
+- if you set defaults for properties (different from the standard defaults), they are automatically assumed to be optional with the default value you set. In the example above `Rectangle.Filling` is such a case: it's automatically understood to be an optional parameter with the default value `Filling.Solid`.
+- the `Parse` method returns an object on which you can switch, using a language facility we've had now for a while. The types you need to handle are all your own POCOs that you have defined as verbs and the special type `HelpResult`
+- `HelpResult` is automatically returned when the arguments contain an explicit call for help, like `sometool help` or `sometool ?` or, if you have multiple verbs, `sometool help myverb`
 
-## Customizability
-
-## Extensibility
-
-### Release History
-
+## More Info
+- multiple verbs
+- nested verbs
+- boolean properties
+- verb specfic help
+- overriding the automatically detected settings (like the name of a parameter)
+see [More Examples](docs/Examples.md).
+- change [global configuration](docs/Configuration.md), for example the prefixes uses for parameter names
+- change how [names are generated](docs/Extensibility.md#inamingstrategy) for verbs and parameters
+- change how [types are formatted](docs/Extensibility.md#itypeformatter) for the help texts
+- change how [example values](docs/Extensibility.md#iexamplevalueprovider) are generated for the help texts
+- [pre-process](docs/Extensibility.md#iargumentpreprocessor) arguments
+- if you want to interact with the low-level parser, without any reflection, check out [these tests](ModernRonin.FluentArgumentParser.Tests\Demo\LowLevelTests.cs)
+- last not least, you can always take a look at the [demo tests](ModernRonin.FluentArgumentParser.Tests\Demo)
