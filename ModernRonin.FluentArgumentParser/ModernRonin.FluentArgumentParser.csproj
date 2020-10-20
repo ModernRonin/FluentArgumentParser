@@ -14,6 +14,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/ModernRonin/FluentArgumentParser</PackageProjectUrl>
     <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageLicenseExpression>CC-BY-SA-4.0</PackageLicenseExpression>
+    <PackageTags>commandline, parser, fluent, reflection, POCO</PackageTags>
+    <Title>FluentArgumentParser</Title>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

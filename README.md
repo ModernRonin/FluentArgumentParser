@@ -1,10 +1,8 @@
 # FluentArgumentParser
 
-> **⚠ Will soon be published, come back in a few days...**
-<!--
 [![NuGet](https://img.shields.io/nuget/v/ModernRonin.FluentArgumentParser.svg)](https://www.nuget.org/packages/ModernRonin.FluentArgumentParser/)
 [![NuGet](https://img.shields.io/nuget/dt/ModernRonin.FluentArgumentParser.svg)](https://www.nuget.org/packages/ModernRonin.FluentArgumentParser)
--->
+
 - [Summary](#summary)
 - [Quickstart](#quick-start---zero-configuration)
 - [More examples](docs/Examples.md)
