@@ -12,7 +12,6 @@ namespace ModernRonin.FluentArgumentParser.Validation
             RuleFor(c => c.ShortNamePrefix).NotEmpty();
             RuleFor(c => c.LongNamePrefix).NotEmpty();
             RuleFor(c => c.ValueDelimiter).NotEmpty();
-            RuleFor(c => c.ArgumentPreprocessor).NotNull();
         }
     }
 }

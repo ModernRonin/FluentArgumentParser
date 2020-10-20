@@ -2,12 +2,15 @@
 using System.Linq;
 using FluentValidation;
 using ModernRonin.FluentArgumentParser.Definition;
+using ModernRonin.FluentArgumentParser.Extensibility;
 using ModernRonin.FluentArgumentParser.Validation;
 
 namespace ModernRonin.FluentArgumentParser.Parsing
 {
     public class CommandLineParser : AVerbContainer, ICommandLineParser
     {
+        readonly IArgumentPreprocessor _argumentPreprocessor;
+
         readonly string[] _helpVerbs =
         {
             "help",
@@ -16,14 +19,20 @@ namespace ModernRonin.FluentArgumentParser.Parsing
 
         readonly IVerbParser _verbParser;
 
-        public CommandLineParser() : this(new VerbParser()) { }
+        public CommandLineParser() : this(new NullArgumentPreprocessor()) { }
+
+        public CommandLineParser(IArgumentPreprocessor argumentPreprocessor) : this(new VerbParser(),
+            argumentPreprocessor) { }
 
         /// <summary>
         ///     This constructor exists mostly for unit-tests, but obviously also forms an extension point for
         ///     the hopefully unlikely event that you find yourself in need of replacing <see cref="VerbParser" />.
         /// </summary>
-        /// <param name="verbParser"></param>
-        public CommandLineParser(IVerbParser verbParser) => _verbParser = verbParser;
+        public CommandLineParser(IVerbParser verbParser, IArgumentPreprocessor argumentPreprocessor)
+        {
+            _verbParser = verbParser;
+            _argumentPreprocessor = argumentPreprocessor;
+        }
 
         public ParserConfiguration Configuration { get; set; } = new ParserConfiguration();
 
@@ -65,7 +74,7 @@ namespace ModernRonin.FluentArgumentParser.Parsing
                 IsDefaultVerb = leafVerb == DefaultVerb
             };
             _verbParser.Parse(Configuration, result,
-                arguments.Select(Configuration.ArgumentPreprocessor.Process).ToArray());
+                arguments.Select(_argumentPreprocessor.Process).ToArray());
             return result;
 
             (Verb, string[]) findLeafVerb(IEnumerable<Verb> verbs, string[] inputs, bool useLastMatch = false)

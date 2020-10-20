@@ -1,5 +1,4 @@
 ﻿using ModernRonin.FluentArgumentParser.Definition;
-using ModernRonin.FluentArgumentParser.Extensibility;
 using ModernRonin.FluentArgumentParser.Help;
 using ModernRonin.FluentArgumentParser.Parsing;
 
@@ -36,37 +35,24 @@ namespace ModernRonin.FluentArgumentParser
         ///     Use this if you want to customize things like case-sensitivity of verbs and arguments etc.
         /// </summary>
         public static IBindingCommandLineParser Create(ParserConfiguration configuration) =>
-            Create(configuration, new DefaultNamingStrategy());
+            Create(configuration, new Services());
 
         /// <summary>
-        ///     Use this if you want to customize how verb and short/long argument names are generated from
-        ///     your POCOs.
+        ///     Use this if you want to use any of the extensibility points.
         /// </summary>
-        public static IBindingCommandLineParser Create(ParserConfiguration configuration,
-            INamingStrategy namingStrategy) =>
-            Create(configuration, namingStrategy, new DefaultTypeFormatter(),
-                new DefaultExampleValueProvider());
-
-        /// <summary>
-        ///     Use this if you want to customize how verb and short/long argument names and help texts are generated from
-        ///     your POCOs.
-        /// </summary>
-        public static IBindingCommandLineParser Create(ParserConfiguration configuration,
-            INamingStrategy namingStrategy,
-            ITypeFormatter typeFormatter,
-            IExampleValueProvider exampleValueProvider) =>
-            Create(namingStrategy, typeFormatter, exampleValueProvider,
-                new CommandLineParser {Configuration = configuration});
+        public static IBindingCommandLineParser
+            Create(ParserConfiguration configuration, Services services) =>
+            Create(services,
+                new CommandLineParser(services.ArgumentPreprocessor) {Configuration = configuration});
 
         /// <summary>
         ///     Use this if all the other overloads are not enough and you also want to customize parsing behavior itself,
-        ///     beyond what <see cref="ParserConfiguration.ArgumentPreprocessor" /> allows you.
+        ///     beyond what <see cref="Services.ArgumentPreprocessor" /> allows you.
         /// </summary>
-        public static IBindingCommandLineParser Create(INamingStrategy namingStrategy,
-            ITypeFormatter typeFormatter,
-            IExampleValueProvider exampleValueProvider,
+        public static IBindingCommandLineParser Create(Services services,
             ICommandLineParser parser) =>
-            new BindingCommandLineParser(parser, new VerbFactory(namingStrategy),
-                new HelpAndErrorInterpreter(new HelpMaker(typeFormatter, exampleValueProvider)));
+            new BindingCommandLineParser(parser, new VerbFactory(services.NamingStrategy),
+                new HelpAndErrorInterpreter(new HelpMaker(services.TypeFormatter,
+                    services.ExampleValueProvider)));
     }
 }

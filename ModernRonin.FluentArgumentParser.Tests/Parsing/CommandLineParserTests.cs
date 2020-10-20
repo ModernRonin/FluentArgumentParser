@@ -16,7 +16,8 @@ namespace ModernRonin.FluentArgumentParser.Tests.Parsing
         public void Setup()
         {
             _verbParser = Substitute.For<IVerbParser>();
-            _underTest = new CommandLineParser(_verbParser)
+            _argumentPreprocessor = Substitute.For<IArgumentPreprocessor>();
+            _underTest = new CommandLineParser(_verbParser, _argumentPreprocessor)
             {
                 Configuration =
                 {
@@ -24,9 +25,7 @@ namespace ModernRonin.FluentArgumentParser.Tests.Parsing
                     ApplicationName = "bla bla name"
                 }
             };
-            _argumentPreprocessor = Substitute.For<IArgumentPreprocessor>();
             _argumentPreprocessor.Process(null).ReturnsForAnyArgs(ci => ci.Arg<string>());
-            _underTest.Configuration.ArgumentPreprocessor = _argumentPreprocessor;
         }
 
         IVerbParser _verbParser;

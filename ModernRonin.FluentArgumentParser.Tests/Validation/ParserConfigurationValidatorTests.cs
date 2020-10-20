@@ -48,12 +48,5 @@ namespace ModernRonin.FluentArgumentParser.Tests.Validation
 
             _underTest.TestValidate(model).ShouldHaveValidationErrorFor(accessor);
         }
-
-        [Test]
-        public void ArgumentPreprocessor_cannot_be_null()
-        {
-            _underTest.TestValidate(new ParserConfiguration {ArgumentPreprocessor = null})
-                .ShouldHaveValidationErrorFor(c => c.ArgumentPreprocessor);
-        }
     }
 }

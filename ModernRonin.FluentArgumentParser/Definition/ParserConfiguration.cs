@@ -1,6 +1,4 @@
-﻿using ModernRonin.FluentArgumentParser.Extensibility;
-
-namespace ModernRonin.FluentArgumentParser.Definition
+﻿namespace ModernRonin.FluentArgumentParser.Definition
 {
     /// <summary>
     ///     This encapsulates the easiest level of customization and used in conjunction with
@@ -52,10 +50,5 @@ namespace ModernRonin.FluentArgumentParser.Definition
         ///     <para>this must be set explicitly and is not optional</para>
         /// </summary>
         public string ApplicationDescription { get; set; } = string.Empty;
-
-        /// <summary>
-        ///     Set this if you need to do special processing of parameters before they are passed onto verbs.
-        /// </summary>
-        public IArgumentPreprocessor ArgumentPreprocessor { get; set; } = new NullArgumentPreprocessor();
     }
 }

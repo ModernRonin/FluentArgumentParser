@@ -54,15 +54,10 @@
                 <para>this must be set explicitly and is not optional</para>
             </summary>
         </member>
-        <member name="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ArgumentPreprocessor">
-            <summary>
-                Set this if you need to do special processing of parameters before they are passed onto verbs.
-            </summary>
-        </member>
         <member name="T:ModernRonin.FluentArgumentParser.Extensibility.IArgumentPreprocessor">
             <summary>
                 <para>
-                    Implement this interface and set <see cref="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ArgumentPreprocessor" /> to your implementation
+                    Implement this interface and set <see cref="P:ModernRonin.FluentArgumentParser.Services.ArgumentPreprocessor" /> to your implementation
                     if you want to pre-process arguments before they are fed into verbs.
                 </para>
                 One example use case for this would be if you are not happy with the quoting mechanism used by the combination of
@@ -197,30 +192,22 @@
                 Use this if you want to customize things like case-sensitivity of verbs and arguments etc.
             </summary>
         </member>
-        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Definition.ParserConfiguration,ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy)">
+        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Definition.ParserConfiguration,ModernRonin.FluentArgumentParser.Services)">
             <summary>
-                Use this if you want to customize how verb and short/long argument names are generated from
-                your POCOs.
+                Use this if you want to use any of the extensibility points.
             </summary>
         </member>
-        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Definition.ParserConfiguration,ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy,ModernRonin.FluentArgumentParser.Extensibility.ITypeFormatter,ModernRonin.FluentArgumentParser.Extensibility.IExampleValueProvider)">
-            <summary>
-                Use this if you want to customize how verb and short/long argument names and help texts are generated from
-                your POCOs.
-            </summary>
-        </member>
-        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Extensibility.INamingStrategy,ModernRonin.FluentArgumentParser.Extensibility.ITypeFormatter,ModernRonin.FluentArgumentParser.Extensibility.IExampleValueProvider,ModernRonin.FluentArgumentParser.Parsing.ICommandLineParser)">
+        <member name="M:ModernRonin.FluentArgumentParser.ParserFactory.Create(ModernRonin.FluentArgumentParser.Services,ModernRonin.FluentArgumentParser.Parsing.ICommandLineParser)">
             <summary>
                 Use this if all the other overloads are not enough and you also want to customize parsing behavior itself,
-                beyond what <see cref="P:ModernRonin.FluentArgumentParser.Definition.ParserConfiguration.ArgumentPreprocessor" /> allows you.
+                beyond what <see cref="P:ModernRonin.FluentArgumentParser.Services.ArgumentPreprocessor" /> allows you.
             </summary>
         </member>
-        <member name="M:ModernRonin.FluentArgumentParser.Parsing.CommandLineParser.#ctor(ModernRonin.FluentArgumentParser.Parsing.IVerbParser)">
+        <member name="M:ModernRonin.FluentArgumentParser.Parsing.CommandLineParser.#ctor(ModernRonin.FluentArgumentParser.Parsing.IVerbParser,ModernRonin.FluentArgumentParser.Extensibility.IArgumentPreprocessor)">
             <summary>
                 This constructor exists mostly for unit-tests, but obviously also forms an extension point for
                 the hopefully unlikely event that you find yourself in need of replacing <see cref="T:ModernRonin.FluentArgumentParser.Parsing.VerbParser" />.
             </summary>
-            <param name="verbParser"></param>
         </member>
         <member name="T:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser">
             <summary>
