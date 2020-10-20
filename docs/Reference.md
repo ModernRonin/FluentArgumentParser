@@ -2,13 +2,19 @@
 
 ## Concepts
 ### Verbs
+Verbs as a term has come into popular use with git, and FluentArgumentParser has adopted this terminology. In essence, a verb models a single action or command. A verb is specified by its name.
 #### Default verb
+Sometimes your console app just exposes a single command. Then it doesn't really make sense to expose verbs. This situation is modelled by defining a DefaultVerb in FluentArgumentParser. Once you define a DefaultVerb, the parser will not let you define any others. Vice versa, if you define regular verbs, the parser will not let you define a DefaultVerb.
 #### Nested verb
+Sometimes you want to group actions. Imagine your app can work with pull requests and exposes several actions on them, for example Create and Finish. But your app also works with branches and exposes actions on them, like pull and push. You could model this with two root verbs, "branch" and "pullrequest" both of which have nested verbs, "pull" and "push" for "branch" and "create" and "finish" for "pullrequest".
 ### Parameters
-#### Required
-#### Optional
-#### Flags
+FluentArgumentParser currently distinguishes three kinds of parameter. It does not support collection parameters (for now - there is an issue for it and this will follow in a future update). 
 
+Required and optional parameters can be specified just by their position in the argument list or via short/long name. They can be numeric types, string or enums. (More types will follow in future updates.)
+
+Flags are simple boolean values. If a flag is not present, it automatically is assumed to be false, if it is present, it is assumed to be true. Ergo, for flags it's enough to specify their name, no value needed. 
+
+This has one consequence: you need to name your flags in such a way as to fit with the default value of false. For example, if your verb can validate its work after being finished and the default is that it does not validate, then you'd call your property "DoValidate". But if the default is to perform validation, and not performing it is the exception, you'd call it "SkipValidation" or something like that. 
 
 ## ParserFactory
 This is the main entry point into FluentArgumentParser and allows you to create parsers with different levels of customization. ParserFactory exposes one method, with several overloads, all of them returning a [IBindingCommandLineParser](#ibindingcommandlineparser). They are, in order from least customization to most:
