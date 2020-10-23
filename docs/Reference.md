@@ -76,7 +76,7 @@ It exposes the following members:
 | `string ApplicationDescription` | A general description of what you app is used for. *This must be set explicitly and is not optional.* |
 | `string LongNamePrefix` | How do we expect the user to prefix long argument names? Default: `--`|
 | `string ShortNamePrefix` | How do we expect the user to prefix short argument names? Default: `-` |
-| `string ValueDelimiter` | How do we expect the user to separate argument values from argument names? Default: =``|
+| `string ValueDelimiter` | How do we expect the user to separate argument values from argument names? Default: `=`|
 | `bool AreVerbNamesCaseSensitive` | Should verb names be case-sensitive? Default: no |
 | `bool AreLongParameterNamesCaseSensitive` | Should long argument names be case-sensitive? Default: yes |
 | `bool AreShortParameterNamesCaseSensitive` | Should short argument names be case-sensitive? Default: no |
@@ -84,18 +84,20 @@ It exposes the following members:
 Implement this interface if you want to customize how verb and parameter names are generated from your POCOs.
 | Member | Description |
 | --- | --- |
-| `string GetLongName(PropertyInfo propertyInfo)` | Generate the long parameter name for a property. The default implementation uses the property's name in kebab-cases form, so for example *MySpecialName* becomes *my-special-name*.|
+| `string GetLongName(PropertyInfo propertyInfo)` | Generate the long parameter name for a property. The default implementation uses the property's name in kebab-cased form, so for example *MySpecialName* becomes *my-special-name*.|
 | `string GetShortName(PropertyInfo propertyInfo, string[] shortNamesToBeExcluded)` | Generate the short parameter name for a property. `shortNamesToBeExcluded` contains all short names that are already claimed by other parameters on the same verb. The default implementation takes the first character of the property's lower-cased name that has not been used yet. In the (hopefully very unlikely) event that there is no such character, it will use `char.MinValue` and additional configuration will be required to enable short-name usage.|
 | `string GetVerbName(Type type)` | Generate the verb name for a POCO. The default implementation uses the lower-cased type's name.|
 ## ITypeFormatter
 Implement this interface if you want to customize how the types of parameters are formatted in help texts. Note that you don't have to worry about <see cref="bool" /> types because they are handled by flag parameters and there is no type displayed for them in help texts.
 
 | Member | Description |
+| --- | --- |
 | `string Format(AParameter parameter)` | The default implementation uses the C# type name for standard types like `int` or `string`, a list of their labels for enums and just the type's name for everything else |
 
 ## IExampleValueProvider
 Implement this interface if you want to customize how values for example calls in help texts are generated.
 | Member | Description |
+| --- | --- |
 | `object For(AParameter parameter)` | Generate an example value for a parameter. The default implementation picks from a list of constants for numeric types and for strings, uses the last label for enums and just `...` for everything else.|
 
 ## IArgumentPreprocessor
@@ -103,4 +105,5 @@ Implement this interface and set via [ParserConfiguration](#parserconfiguration)
 
 One example use case for this would be if you are not happy with the quoting mechanism used by the combination of shell and CLR runtime and want to customize it.
 | Member | Description |
+| --- | --- |
 | `string Process(string what);` | return the transformed argument |
