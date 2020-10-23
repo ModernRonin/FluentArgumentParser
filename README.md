@@ -5,9 +5,9 @@
 
 - [Summary](#summary)
 - [Quickstart](#quick-start---zero-configuration)
-- [More examples](docs/Examples.md)
-- [Advanced Configuration](docs/Configuration)
-- [Extensibility](docs/Extensibility.md)
+- [More Info](#more-info)
+- [License](#license)
+- [Contributing](#contributing)
 - [Release History](docs/ReleaseHistory.md)
 
 ## Summary
@@ -115,3 +115,15 @@ see [More Examples](docs/Examples.md#multiple-and-nested-verbs-with-additional-c
 - [pre-process](docs/Reference.md#iargumentpreprocessor) arguments
 - if you want to interact with the low-level parser, without any reflection, check out [these tests](ModernRonin.FluentArgumentParser.Tests/Demo/LowLevelTests.cs)
 - last not least, you can always take a look at the [demo tests](ModernRonin.FluentArgumentParser.Tests/Demo)
+
+## Contributing
+If you want to contribute, you are more than welcome. Check out the issues page. There are a few issues marked as `good-first-issue` and a few others as `help-wanted`. 
+
+Furthermore, issues marked as `needs-design` would benefit from discussion about how they should ideally work, both for end-users and for library-users.
+
+Last not least, there are a few ideas marked as `do-people-need-this`- for these, it would be very interesting to get as many opinions as possible. 
+
+## License
+The [license](./LICENSE) is [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). In essence this means you are free to use and distribute and change this tool however you see fit, as long as you provide a link to the license
+and share any customizations/changes you might perform under the same license. 
+
