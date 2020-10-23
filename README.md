@@ -102,16 +102,16 @@ Things to note:
 - `HelpResult` is automatically returned when the arguments contain an explicit call for help, like `sometool help` or `sometool ?` or, if you have multiple verbs, `sometool help myverb`
 
 ## More Info
-- multiple verbs
-- nested verbs
-- boolean properties
-- verb specfic help
+- [multiple verbs](docs/Examples.md#multiple-verbs-no-configuration)
+- [nested verbs](docs/Examples.md#multiple-and-nested-verbs-no-configuration)
+- [boolean properties](docs/Reference.md#parameters)
+- [verb specfic help](docs/Examples.md#help-startfeature)
 - overriding the automatically detected settings (like the name of a parameter)
-see [More Examples](docs/Examples.md).
+see [More Examples](docs/Examples.md#multiple-and-nested-verbs-with-additional-configuration).
 - change [global configuration](docs/Configuration.md), for example the prefixes uses for parameter names
-- change how [names are generated](docs/Extensibility.md#inamingstrategy) for verbs and parameters
-- change how [types are formatted](docs/Extensibility.md#itypeformatter) for the help texts
-- change how [example values](docs/Extensibility.md#iexamplevalueprovider) are generated for the help texts
-- [pre-process](docs/Extensibility.md#iargumentpreprocessor) arguments
+- change how [names are generated](docs/Extensibility.md#name-generation) for verbs and parameters
+- change how [types are formatted](docs/Extensibility.md#help-generation) for the help texts
+- change how [example values](docs/Extensibility.md#help-generation) are generated for the help texts
+- [pre-process](docs/Reference.md#iargumentpreprocessor) arguments
 - if you want to interact with the low-level parser, without any reflection, check out [these tests](ModernRonin.FluentArgumentParser.Tests/Demo/LowLevelTests.cs)
 - last not least, you can always take a look at the [demo tests](ModernRonin.FluentArgumentParser.Tests/Demo)
