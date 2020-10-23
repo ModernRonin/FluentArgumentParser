@@ -9,7 +9,7 @@ Implement [INamingStrategy](Reference.md#inamingstrategy) and pass it to the cor
 ## Help generation
 >You don't like how property/parameter types are formatted in the help or how examples are generated?
 
-Implement [ITypeFormatter](Reference.md#itypeformatter) or [IExampleValueProvider](Reference.md#)iexamplevalueprovider and pass it to the corresponding overload of [ParserFactory.Create](Reference.md#parserfactory).
+Implement [ITypeFormatter](Reference.md#itypeformatter) or [IExampleValueProvider](Reference.md#iexamplevalueprovider) and pass it to the corresponding overload of [ParserFactory.Create](Reference.md#parserfactory).
 
 ## Exchanging the low-level parser
 >This should hopefully never become necessary, but *if* you want to customize the parser itself, you can do that, too.
