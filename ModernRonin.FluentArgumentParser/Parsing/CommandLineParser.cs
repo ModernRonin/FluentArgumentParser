@@ -37,10 +37,11 @@ namespace ModernRonin.FluentArgumentParser.Parsing
         public ParserConfiguration Configuration { get; set; } = new ParserConfiguration();
 
         public Verb DefaultVerb { get; set; }
-
+        public bool DoSkipValidation { get; set; }
         public VerbCall Parse(string[] args)
         {
-            new CommandLineParserValidator().ValidateAndThrow(this);
+            if (!DoSkipValidation)
+                new CommandLineParserValidator().ValidateAndThrow(this);
 
             if (args.Length == 0) return new VerbCall {IsHelpRequest = true};
             if (args.Length == 1 && _helpVerbs.Contains(args[0].ToLowerInvariant()))
