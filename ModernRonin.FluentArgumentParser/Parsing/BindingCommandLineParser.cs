@@ -46,6 +46,11 @@ namespace ModernRonin.FluentArgumentParser.Parsing
             return result;
         }
 
+        public bool DoSkipValidation
+        {
+            get => _parser.DoSkipValidation;
+            set => _parser.DoSkipValidation = value;
+        }
         public object Parse(string[] args)
         {
             if (_defaultVerbBinding == default && !_verbBindings.Any())

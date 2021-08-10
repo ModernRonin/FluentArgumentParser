@@ -234,6 +234,13 @@
                 Gets the overview help text, in case you need to display it without the user providing any input yet.
             </summary>
         </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.DoSkipValidation">
+            <summary>
+            Set this to true to prevent your verb and parameter configuration from being validated. This exists only
+            because there seem to be situations when the library used for validation generates MissingMethodExceptions.
+            <para>Use with care - this is bound to be removed in the future once the actual problem has been fixed.</para>
+            </summary>
+        </member>
         <member name="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.AddVerb``1">
             <summary>
                 Use this if your app supports verbs. The type parameter is a regular POCO. Use the return value to further

@@ -6,6 +6,7 @@ namespace ModernRonin.FluentArgumentParser.Parsing
     {
         Verb DefaultVerb { get; set; }
         ParserConfiguration Configuration { get; }
+        bool DoSkipValidation { get; set; }
         VerbCall Parse(string[] args);
     }
 }
