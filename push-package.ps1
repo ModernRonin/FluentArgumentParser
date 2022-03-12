@@ -9,7 +9,7 @@ if (-not $nugetApiKey)
 
 if (-not $version) 
 {
-	[xml]$xml= Get-Content .\ModernRonin.FluentArgumentParser\release.history
+	[xml]$xml= Get-Content .\release.history
 	$version= $xml.Project.PropertyGroup.Version.ToString()
 }
 if (-not $version) 
