@@ -1,7 +1,6 @@
-﻿namespace ModernRonin.FluentArgumentParser.Extensibility
+﻿namespace ModernRonin.FluentArgumentParser.Extensibility;
+
+public class NullArgumentPreprocessor : IArgumentPreprocessor
 {
-    public class NullArgumentPreprocessor : IArgumentPreprocessor
-    {
-        public string Process(string what) => what;
-    }
+    public string Process(string what) => what;
 }

@@ -1,10 +1,9 @@
 ﻿using ModernRonin.FluentArgumentParser.Help;
 
-namespace ModernRonin.FluentArgumentParser.Parsing
+namespace ModernRonin.FluentArgumentParser.Parsing;
+
+public interface IHelpAndErrorInterpreter
 {
-    public interface IHelpAndErrorInterpreter
-    {
-        HelpResult Interpret(VerbCall call, ICommandLineParser parser);
-        string GetHelpOverview(ICommandLineParser parser);
-    }
+    HelpResult Interpret(VerbCall call, ICommandLineParser parser);
+    string GetHelpOverview(ICommandLineParser parser);
 }

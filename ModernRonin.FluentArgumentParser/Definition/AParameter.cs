@@ -1,9 +1,8 @@
-﻿namespace ModernRonin.FluentArgumentParser.Definition
+﻿namespace ModernRonin.FluentArgumentParser.Definition;
+
+public abstract class AParameter
 {
-    public abstract class AParameter
-    {
-        public string ShortName { get; set; }
-        public string LongName { get; set; }
-        public string HelpText { get; set; } = string.Empty;
-    }
+    public string ShortName { get; set; }
+    public string LongName { get; set; }
+    public string HelpText { get; set; } = string.Empty;
 }

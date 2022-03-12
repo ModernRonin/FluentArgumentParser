@@ -1,12 +1,11 @@
 ﻿using ModernRonin.FluentArgumentParser.Definition;
 
-namespace ModernRonin.FluentArgumentParser.Parsing
+namespace ModernRonin.FluentArgumentParser.Parsing;
+
+public interface ICommandLineParser : IVerbContainer
 {
-    public interface ICommandLineParser : IVerbContainer
-    {
-        Verb DefaultVerb { get; set; }
-        ParserConfiguration Configuration { get; }
-        bool DoSkipValidation { get; set; }
-        VerbCall Parse(string[] args);
-    }
+    Verb DefaultVerb { get; set; }
+    ParserConfiguration Configuration { get; }
+    bool DoSkipValidation { get; set; }
+    VerbCall Parse(string[] args);
 }

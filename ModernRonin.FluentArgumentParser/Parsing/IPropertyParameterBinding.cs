@@ -1,11 +1,10 @@
 ﻿using System.Reflection;
 using ModernRonin.FluentArgumentParser.Definition;
 
-namespace ModernRonin.FluentArgumentParser.Parsing
+namespace ModernRonin.FluentArgumentParser.Parsing;
+
+public interface IPropertyParameterBinding
 {
-    public interface IPropertyParameterBinding
-    {
-        AParameter Parameter { get; set; }
-        bool DoesMatch(PropertyInfo propertyInfo);
-    }
+    AParameter Parameter { get; set; }
+    bool DoesMatch(PropertyInfo propertyInfo);
 }

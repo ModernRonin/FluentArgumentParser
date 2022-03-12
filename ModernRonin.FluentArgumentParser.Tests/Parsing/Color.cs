@@ -1,9 +1,8 @@
-﻿namespace ModernRonin.FluentArgumentParser.Tests.Parsing
+﻿namespace ModernRonin.FluentArgumentParser.Tests.Parsing;
+
+public enum Color
 {
-    public enum Color
-    {
-        Red,
-        Green,
-        Blue
-    }
+    Red,
+    Green,
+    Blue
 }

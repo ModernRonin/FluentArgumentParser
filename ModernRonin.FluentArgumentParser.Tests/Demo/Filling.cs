@@ -1,9 +1,8 @@
-﻿namespace ModernRonin.FluentArgumentParser.Tests.Demo
+﻿namespace ModernRonin.FluentArgumentParser.Tests.Demo;
+
+public enum Filling
 {
-    public enum Filling
-    {
-        None,
-        Hatched,
-        Solid
-    }
+    None,
+    Hatched,
+    Solid
 }

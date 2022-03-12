@@ -1,7 +1,6 @@
-﻿namespace ModernRonin.FluentArgumentParser.Tests.Parsing
+﻿namespace ModernRonin.FluentArgumentParser.Tests.Parsing;
+
+public class TargetAncestor
 {
-    public class TargetAncestor
-    {
-        public string InheritedProperty { get; set; }
-    }
+    public string InheritedProperty { get; set; }
 }
