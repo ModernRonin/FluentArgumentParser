@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using FluentValidation;
 
-namespace ModernRonin.FluentArgumentParser.Validation
+namespace ModernRonin.FluentArgumentParser.Validation;
+
+public static class RuleBuilderInitialExtensions
 {
-    public static class RuleBuilderInitialExtensions
+    public static IRuleBuilderOptions<TContainer, IEnumerable<TElement>> MustHaveDistinct<TContainer,
+        TElement, TSubProperty>(
+        this IRuleBuilderInitial<TContainer, IEnumerable<TElement>> self,
+        Expression<Func<TElement, TSubProperty>> propertySelector)
     {
-        public static Rules<T, TElement> Collection<T, TElement>(
-            this IRuleBuilderInitial<T, IEnumerable<TElement>> self) =>
-            new Rules<T, TElement>(self);
+        return self.Must(haveNoDuplicates)
+            .WithMessage($"Elements of collection must have distinct values for {propertySelector}");
 
-        public class Rules<TOwner, TElement>
+        bool haveNoDuplicates(TContainer container,
+            IEnumerable<TElement> elements,
+            ValidationContext<TContainer> context)
         {
-            readonly IRuleBuilderInitial<TOwner, IEnumerable<TElement>> _ruleBuilder;
-
-            public Rules(IRuleBuilderInitial<TOwner, IEnumerable<TElement>> ruleBuilder) =>
-                _ruleBuilder = ruleBuilder;
-
-            public IRuleBuilderOptions<TOwner, IEnumerable<TElement>> NoDuplicateValuesFor<TSubProperty>(
-                Expression<Func<TElement, TSubProperty>> accessor)
-            {
-                var validator = new NoDuplicateValuesValidator<TElement, TSubProperty>(accessor);
-                return _ruleBuilder.SetValidator(validator);
-            }
+            var subject = elements.ToArray();
+            if (subject.DistinctBy(propertySelector.Compile()).Count() == subject.Length) return true;
+            return false;
         }
     }
 }

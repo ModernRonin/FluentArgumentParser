@@ -1,13 +1,12 @@
 ﻿using FluentValidation;
 using ModernRonin.FluentArgumentParser.Definition;
 
-namespace ModernRonin.FluentArgumentParser.Validation
+namespace ModernRonin.FluentArgumentParser.Validation;
+
+public class RequiredParameterValidator : AbstractValidator<RequiredParameter>
 {
-    public class RequiredParameterValidator : AbstractValidator<RequiredParameter>
+    public RequiredParameterValidator()
     {
-        public RequiredParameterValidator()
-        {
-            Include(new IndexableParameterValidator());
-        }
+        Include(new IndexableParameterValidator());
     }
 }

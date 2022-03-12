@@ -1,9 +1,8 @@
 ﻿using ModernRonin.FluentArgumentParser.Definition;
 
-namespace ModernRonin.FluentArgumentParser.Parsing
+namespace ModernRonin.FluentArgumentParser.Parsing;
+
+public interface IVerbParser
 {
-    public interface IVerbParser
-    {
-        void Parse(ParserConfiguration configuration, VerbCall verb, string[] args);
-    }
+    void Parse(ParserConfiguration configuration, VerbCall verb, string[] args);
 }

@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using ModernRonin.FluentArgumentParser.Definition;
 
-namespace ModernRonin.FluentArgumentParser.Validation
+namespace ModernRonin.FluentArgumentParser.Validation;
+
+public class OptionalParameterValidator : AbstractValidator<OptionalParameter>
 {
-    public class OptionalParameterValidator : AbstractValidator<OptionalParameter>
+    public OptionalParameterValidator()
     {
-        public OptionalParameterValidator()
-        {
-            Include(new IndexableParameterValidator());
-            RuleFor(p => p.Default).NotNull();
-        }
+        Include(new IndexableParameterValidator());
+        RuleFor(p => p.Default).NotNull();
     }
 }

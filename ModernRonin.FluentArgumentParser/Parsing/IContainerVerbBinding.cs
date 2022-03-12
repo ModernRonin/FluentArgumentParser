@@ -1,8 +1,7 @@
-﻿namespace ModernRonin.FluentArgumentParser.Parsing
+﻿namespace ModernRonin.FluentArgumentParser.Parsing;
+
+public interface IContainerVerbBinding : IVerbBinding
 {
-    public interface IContainerVerbBinding : IVerbBinding
-    {
-        ILeafVerbBinding<T> AddVerb<T>() where T : new();
-        IContainerVerbBinding AddContainerVerb<T>();
-    }
+    ILeafVerbBinding<T> AddVerb<T>() where T : new();
+    IContainerVerbBinding AddContainerVerb<T>();
 }

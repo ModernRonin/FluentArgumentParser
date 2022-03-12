@@ -1,7 +1,6 @@
-﻿namespace ModernRonin.FluentArgumentParser.Definition
+﻿namespace ModernRonin.FluentArgumentParser.Definition;
+
+public class OptionalParameter : AnIndexableParameter
 {
-    public class OptionalParameter : AnIndexableParameter
-    {
-        public object Default { get; set; }
-    }
+    public object Default { get; set; }
 }

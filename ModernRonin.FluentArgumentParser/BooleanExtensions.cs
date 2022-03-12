@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace ModernRonin.FluentArgumentParser
+namespace ModernRonin.FluentArgumentParser;
+
+static class BooleanExtensions
 {
-    static class BooleanExtensions
-    {
-        public static StringComparison StringComparison(this bool self) =>
-            self
-                ? System.StringComparison.InvariantCulture
-                : System.StringComparison.InvariantCultureIgnoreCase;
-    }
+    public static StringComparison StringComparison(this bool self) =>
+        self
+            ? System.StringComparison.InvariantCulture
+            : System.StringComparison.InvariantCultureIgnoreCase;
 }

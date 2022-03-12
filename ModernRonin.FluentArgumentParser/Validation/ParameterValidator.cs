@@ -1,15 +1,14 @@
 ﻿using FluentValidation;
 using ModernRonin.FluentArgumentParser.Definition;
 
-namespace ModernRonin.FluentArgumentParser.Validation
+namespace ModernRonin.FluentArgumentParser.Validation;
+
+public class ParameterValidator : AbstractValidator<AParameter>
 {
-    public class ParameterValidator : AbstractValidator<AParameter>
+    public ParameterValidator()
     {
-        public ParameterValidator()
-        {
-            RuleFor(p => p.LongName).NotEmpty();
-            RuleFor(p => p.ShortName).NotEmpty();
-            RuleFor(p => p.HelpText).NotNull();
-        }
+        RuleFor(p => p.LongName).NotEmpty();
+        RuleFor(p => p.ShortName).NotEmpty();
+        RuleFor(p => p.HelpText).NotNull();
     }
 }

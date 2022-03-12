@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace ModernRonin.FluentArgumentParser
+namespace ModernRonin.FluentArgumentParser;
+
+public static class TypeExtensions
 {
-    public static class TypeExtensions
-    {
-        public static object DefaultValue(this Type self) =>
-            self.IsValueType ? Activator.CreateInstance(self) : null;
-    }
+    public static object DefaultValue(this Type self) =>
+        self.IsValueType ? Activator.CreateInstance(self) : null;
 }

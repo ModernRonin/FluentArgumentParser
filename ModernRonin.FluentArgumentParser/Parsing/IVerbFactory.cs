@@ -1,8 +1,7 @@
-﻿namespace ModernRonin.FluentArgumentParser.Parsing
+﻿namespace ModernRonin.FluentArgumentParser.Parsing;
+
+public interface IVerbFactory
 {
-    public interface IVerbFactory
-    {
-        ILeafVerbBinding<T> MakeLeafBinding<T>() where T : new();
-        IContainerVerbBinding MakeContainerBinding<T>();
-    }
+    ILeafVerbBinding<T> MakeLeafBinding<T>() where T : new();
+    IContainerVerbBinding MakeContainerBinding<T>();
 }

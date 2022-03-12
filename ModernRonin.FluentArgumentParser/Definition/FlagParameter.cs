@@ -1,4 +1,3 @@
-﻿namespace ModernRonin.FluentArgumentParser.Definition
-{
-    public class FlagParameter : AParameter { }
-}
+﻿namespace ModernRonin.FluentArgumentParser.Definition;
+
+public class FlagParameter : AParameter { }

@@ -8,342 +8,341 @@ using ModernRonin.FluentArgumentParser.Parsing;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ModernRonin.FluentArgumentParser.Tests.Help
+namespace ModernRonin.FluentArgumentParser.Tests.Help;
+
+[UseReporter(typeof(NCrunchReporter))]
+[TestFixture]
+public class HelpMakerTests
 {
-    [UseReporter(typeof(NCrunchReporter))]
-    [TestFixture]
-    public class HelpMakerTests
+    enum Color
     {
-        enum Color
+        Red,
+        Green,
+        Blue
+    }
+
+    [Test]
+    public void GenerateFor_DefaultVerb()
+    {
+        var verb = new Verb
         {
-            Red,
-            Green,
-            Blue
-        }
+            Name = "rect",
+            HelpText = "Draws a rectangle.",
+            Parameters = new AParameter[]
+            {
+                new RequiredParameter
+                {
+                    Index = 1,
+                    LongName = "y",
+                    ShortName = "y",
+                    Type = typeof(int),
+                    HelpText = "the y-coordinate"
+                },
+                new RequiredParameter
+                {
+                    Index = 0,
+                    LongName = "x",
+                    ShortName = "x",
+                    Type = typeof(int),
+                    HelpText = "the x-coordinate"
+                },
+                new OptionalParameter
+                {
+                    Index = 2,
+                    LongName = "width",
+                    ShortName = "w",
+                    Type = typeof(int),
+                    Default = 10,
+                    HelpText = "the width"
+                },
+                new OptionalParameter
+                {
+                    Index = 3,
+                    LongName = "height",
+                    ShortName = "h",
+                    Type = typeof(int),
+                    Default = 20,
+                    HelpText = "the height"
+                },
+                new OptionalParameter
+                {
+                    Index = 4,
+                    LongName = "color",
+                    ShortName = "c",
+                    Type = typeof(Color),
+                    Default = Color.Green,
+                    HelpText = "the color to use"
+                },
+                new FlagParameter
+                {
+                    LongName = "do-fill",
+                    ShortName = "f",
+                    HelpText = "fill the rectangle"
+                }
+            }
+        };
+        var actual =
+            new HelpMaker().GenerateFor(verb, true,
+                new ParserConfiguration { ApplicationName = "cooltool" });
 
-        [Test]
-        public void GenerateFor_DefaultVerb()
+        Approvals.Verify(actual);
+    }
+
+    [Test]
+    public void GenerateFor_Overview_With_Multiple_Verbs()
+    {
+        var parser = Substitute.For<ICommandLineParser>();
+        parser.Configuration.Returns(new ParserConfiguration
         {
-            var verb = new Verb
+            ApplicationName = "cooltool",
+            ApplicationDescription = "another super cool tool blablabla"
+        });
+        parser.GetEnumerator()
+            .Returns(new List<Verb>
             {
-                Name = "rect",
-                HelpText = "Draws a rectangle.",
-                Parameters = new AParameter[]
+                new()
                 {
-                    new RequiredParameter
-                    {
-                        Index = 1,
-                        LongName = "y",
-                        ShortName = "y",
-                        Type = typeof(int),
-                        HelpText = "the y-coordinate"
-                    },
-                    new RequiredParameter
-                    {
-                        Index = 0,
-                        LongName = "x",
-                        ShortName = "x",
-                        Type = typeof(int),
-                        HelpText = "the x-coordinate"
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 2,
-                        LongName = "width",
-                        ShortName = "w",
-                        Type = typeof(int),
-                        Default = 10,
-                        HelpText = "the width"
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 3,
-                        LongName = "height",
-                        ShortName = "h",
-                        Type = typeof(int),
-                        Default = 20,
-                        HelpText = "the height"
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 4,
-                        LongName = "color",
-                        ShortName = "c",
-                        Type = typeof(Color),
-                        Default = Color.Green,
-                        HelpText = "the color to use"
-                    },
-                    new FlagParameter
-                    {
-                        LongName = "do-fill",
-                        ShortName = "f",
-                        HelpText = "fill the rectangle"
-                    }
+                    Name = "sing",
+                    HelpText = "sing you a song"
+                },
+                new()
+                {
+                    Name = "dance",
+                    HelpText = "dance to your tune"
+                },
+                new()
+                {
+                    Name = "explode",
+                    HelpText = "explode right into your face"
                 }
-            };
-            var actual =
-                new HelpMaker().GenerateFor(verb, true,
-                    new ParserConfiguration {ApplicationName = "cooltool"});
+            }.GetEnumerator());
 
-            Approvals.Verify(actual);
-        }
+        var actual = new HelpMaker().GenerateFor(parser);
 
-        [Test]
-        public void GenerateFor_Overview_With_Multiple_Verbs()
+        Approvals.Verify(actual);
+    }
+
+    [Test]
+    public void GenerateFor_SingleVerb()
+    {
+        var verb = new Verb
         {
-            var parser = Substitute.For<ICommandLineParser>();
-            parser.Configuration.Returns(new ParserConfiguration
+            Name = "rect",
+            HelpText = "Draws a rectangle.",
+            Parameters = new AParameter[]
             {
-                ApplicationName = "cooltool",
-                ApplicationDescription = "another super cool tool blablabla"
-            });
-            parser.GetEnumerator()
-                .Returns(new List<Verb>
+                new RequiredParameter
                 {
-                    new Verb
-                    {
-                        Name = "sing",
-                        HelpText = "sing you a song"
-                    },
-                    new Verb
-                    {
-                        Name = "dance",
-                        HelpText = "dance to your tune"
-                    },
-                    new Verb
-                    {
-                        Name = "explode",
-                        HelpText = "explode right into your face"
-                    }
-                }.GetEnumerator());
+                    Index = 1,
+                    LongName = "y",
+                    ShortName = "y",
+                    Type = typeof(int),
+                    HelpText = "the y-coordinate"
+                },
+                new RequiredParameter
+                {
+                    Index = 0,
+                    LongName = "x",
+                    ShortName = "x",
+                    Type = typeof(int),
+                    HelpText = "the x-coordinate"
+                },
+                new OptionalParameter
+                {
+                    Index = 2,
+                    LongName = "width",
+                    ShortName = "w",
+                    Type = typeof(int),
+                    Default = 10,
+                    HelpText = "the width"
+                },
+                new OptionalParameter
+                {
+                    Index = 3,
+                    LongName = "height",
+                    ShortName = "h",
+                    Type = typeof(int),
+                    Default = 20,
+                    HelpText = "the height"
+                },
+                new OptionalParameter
+                {
+                    Index = 4,
+                    LongName = "color",
+                    ShortName = "c",
+                    Type = typeof(Color),
+                    Default = Color.Green,
+                    HelpText = "the color to use"
+                },
+                new FlagParameter
+                {
+                    LongName = "do-fill",
+                    ShortName = "f",
+                    HelpText = "fill the rectangle"
+                }
+            }
+        };
+        var actual =
+            new HelpMaker().GenerateFor(verb, false,
+                new ParserConfiguration { ApplicationName = "cooltool" });
 
-            var actual = new HelpMaker().GenerateFor(parser);
+        Approvals.Verify(actual);
+    }
 
-            Approvals.Verify(actual);
-        }
-
-        [Test]
-        public void GenerateFor_SingleVerb()
+    [Test]
+    public void GenerateFor_SingleVerb_if_no_HelpTexts_are_set()
+    {
+        var verb = new Verb
         {
-            var verb = new Verb
+            Name = "rect",
+            Parameters = new AParameter[]
             {
-                Name = "rect",
-                HelpText = "Draws a rectangle.",
-                Parameters = new AParameter[]
+                new RequiredParameter
                 {
-                    new RequiredParameter
-                    {
-                        Index = 1,
-                        LongName = "y",
-                        ShortName = "y",
-                        Type = typeof(int),
-                        HelpText = "the y-coordinate"
-                    },
-                    new RequiredParameter
-                    {
-                        Index = 0,
-                        LongName = "x",
-                        ShortName = "x",
-                        Type = typeof(int),
-                        HelpText = "the x-coordinate"
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 2,
-                        LongName = "width",
-                        ShortName = "w",
-                        Type = typeof(int),
-                        Default = 10,
-                        HelpText = "the width"
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 3,
-                        LongName = "height",
-                        ShortName = "h",
-                        Type = typeof(int),
-                        Default = 20,
-                        HelpText = "the height"
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 4,
-                        LongName = "color",
-                        ShortName = "c",
-                        Type = typeof(Color),
-                        Default = Color.Green,
-                        HelpText = "the color to use"
-                    },
-                    new FlagParameter
-                    {
-                        LongName = "do-fill",
-                        ShortName = "f",
-                        HelpText = "fill the rectangle"
-                    }
+                    Index = 1,
+                    LongName = "y",
+                    ShortName = "y",
+                    Type = typeof(int)
+                },
+                new RequiredParameter
+                {
+                    Index = 0,
+                    LongName = "x",
+                    ShortName = "x",
+                    Type = typeof(int)
+                },
+                new OptionalParameter
+                {
+                    Index = 2,
+                    LongName = "width",
+                    ShortName = "w",
+                    Type = typeof(int),
+                    Default = 10
+                },
+                new OptionalParameter
+                {
+                    Index = 3,
+                    LongName = "height",
+                    ShortName = "h",
+                    Type = typeof(int),
+                    Default = 20
+                },
+                new OptionalParameter
+                {
+                    Index = 4,
+                    LongName = "color",
+                    ShortName = "c",
+                    Type = typeof(Color),
+                    Default = Color.Green
+                },
+                new FlagParameter
+                {
+                    LongName = "do-fill",
+                    ShortName = "f"
                 }
-            };
-            var actual =
-                new HelpMaker().GenerateFor(verb, false,
-                    new ParserConfiguration {ApplicationName = "cooltool"});
+            }
+        };
+        var actual =
+            new HelpMaker().GenerateFor(verb, false,
+                new ParserConfiguration { ApplicationName = "cooltool" });
 
-            Approvals.Verify(actual);
-        }
+        Approvals.Verify(actual);
+    }
 
-        [Test]
-        public void GenerateFor_SingleVerb_if_no_HelpTexts_are_set()
+    [Test]
+    public void GenerateFor_SingleVerb_With_Children()
+    {
+        var verb = new Verb
         {
-            var verb = new Verb
-            {
-                Name = "rect",
-                Parameters = new AParameter[]
-                {
-                    new RequiredParameter
-                    {
-                        Index = 1,
-                        LongName = "y",
-                        ShortName = "y",
-                        Type = typeof(int)
-                    },
-                    new RequiredParameter
-                    {
-                        Index = 0,
-                        LongName = "x",
-                        ShortName = "x",
-                        Type = typeof(int)
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 2,
-                        LongName = "width",
-                        ShortName = "w",
-                        Type = typeof(int),
-                        Default = 10
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 3,
-                        LongName = "height",
-                        ShortName = "h",
-                        Type = typeof(int),
-                        Default = 20
-                    },
-                    new OptionalParameter
-                    {
-                        Index = 4,
-                        LongName = "color",
-                        ShortName = "c",
-                        Type = typeof(Color),
-                        Default = Color.Green
-                    },
-                    new FlagParameter
-                    {
-                        LongName = "do-fill",
-                        ShortName = "f"
-                    }
-                }
-            };
-            var actual =
-                new HelpMaker().GenerateFor(verb, false,
-                    new ParserConfiguration {ApplicationName = "cooltool"});
-
-            Approvals.Verify(actual);
-        }
-
-        [Test]
-        public void GenerateFor_SingleVerb_With_Children()
+            Name = "consume",
+            HelpText = "consume nutrition one way or another"
+        };
+        verb.Add(new Verb
         {
-            var verb = new Verb
+            Name = "eat",
+            HelpText = "consume by eating",
+            Parameters = new[]
             {
-                Name = "consume",
-                HelpText = "consume nutrition one way or another"
-            };
-            verb.Add(new Verb
-            {
-                Name = "eat",
-                HelpText = "consume by eating",
-                Parameters = new[]
+                new RequiredParameter
                 {
-                    new RequiredParameter
-                    {
-                        Index = 0,
-                        LongName = "dish",
-                        ShortName = "d",
-                        Type = typeof(string),
-                        HelpText = "the dish to eat"
-                    }
+                    Index = 0,
+                    LongName = "dish",
+                    ShortName = "d",
+                    Type = typeof(string),
+                    HelpText = "the dish to eat"
                 }
-            });
-            verb.Add(new Verb
-            {
-                Name = "drink",
-                HelpText = "consume by drinking",
-                Parameters = new[]
-                {
-                    new RequiredParameter
-                    {
-                        Index = 0,
-                        LongName = "drink",
-                        ShortName = "d",
-                        Type = typeof(string),
-                        HelpText = "the drink to drink"
-                    }
-                }
-            });
-
-            var actual =
-                new HelpMaker().GenerateFor(verb, false,
-                    new ParserConfiguration {ApplicationName = "cooltool"});
-
-            Approvals.Verify(actual);
-        }
-
-        [Test]
-        public void GenerateFor_SingleVerb_With_Children_For_Child()
+            }
+        });
+        verb.Add(new Verb
         {
-            var consume = new Verb
+            Name = "drink",
+            HelpText = "consume by drinking",
+            Parameters = new[]
             {
-                Name = "consume",
-                HelpText = "consume nutrition one way or another"
-            };
-            consume.Add(new Verb
-            {
-                Name = "eat",
-                HelpText = "consume by eating",
-                Parameters = new[]
+                new RequiredParameter
                 {
-                    new RequiredParameter
-                    {
-                        Index = 0,
-                        LongName = "dish",
-                        ShortName = "d",
-                        Type = typeof(string),
-                        HelpText = "the dish to eat"
-                    }
+                    Index = 0,
+                    LongName = "drink",
+                    ShortName = "d",
+                    Type = typeof(string),
+                    HelpText = "the drink to drink"
                 }
-            });
-            var drink = new Verb
+            }
+        });
+
+        var actual =
+            new HelpMaker().GenerateFor(verb, false,
+                new ParserConfiguration { ApplicationName = "cooltool" });
+
+        Approvals.Verify(actual);
+    }
+
+    [Test]
+    public void GenerateFor_SingleVerb_With_Children_For_Child()
+    {
+        var consume = new Verb
+        {
+            Name = "consume",
+            HelpText = "consume nutrition one way or another"
+        };
+        consume.Add(new Verb
+        {
+            Name = "eat",
+            HelpText = "consume by eating",
+            Parameters = new[]
             {
-                Name = "drink",
-                HelpText = "consume by drinking",
-                Parameters = new[]
+                new RequiredParameter
                 {
-                    new RequiredParameter
-                    {
-                        Index = 0,
-                        LongName = "beverage",
-                        ShortName = "b",
-                        Type = typeof(string),
-                        HelpText = "the beverage to drink"
-                    }
+                    Index = 0,
+                    LongName = "dish",
+                    ShortName = "d",
+                    Type = typeof(string),
+                    HelpText = "the dish to eat"
                 }
-            };
-            consume.Add(drink);
+            }
+        });
+        var drink = new Verb
+        {
+            Name = "drink",
+            HelpText = "consume by drinking",
+            Parameters = new[]
+            {
+                new RequiredParameter
+                {
+                    Index = 0,
+                    LongName = "beverage",
+                    ShortName = "b",
+                    Type = typeof(string),
+                    HelpText = "the beverage to drink"
+                }
+            }
+        };
+        consume.Add(drink);
 
-            var actual =
-                new HelpMaker().GenerateFor(drink, false,
-                    new ParserConfiguration {ApplicationName = "cooltool"});
+        var actual =
+            new HelpMaker().GenerateFor(drink, false,
+                new ParserConfiguration { ApplicationName = "cooltool" });
 
-            Approvals.Verify(actual);
-        }
+        Approvals.Verify(actual);
     }
 }

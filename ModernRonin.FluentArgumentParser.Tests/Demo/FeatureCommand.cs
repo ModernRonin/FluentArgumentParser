@@ -1,7 +1,6 @@
-﻿namespace ModernRonin.FluentArgumentParser.Tests.Demo
+﻿namespace ModernRonin.FluentArgumentParser.Tests.Demo;
+
+public class FeatureCommand
 {
-    public class FeatureCommand
-    {
-        public string Name { get; set; }
-    }
+    public string Name { get; set; }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
     <Authors>Modern Ronin</Authors>
     <Description>Parse command-line args directly into your POCOs with a simple, yet complete and elegant fluent API</Description>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -17,18 +17,23 @@
     <PackageLicenseExpression>CC-BY-SA-4.0</PackageLicenseExpression>
     <PackageTags>commandline, parser, fluent, reflection, POCO</PackageTags>
     <Title>FluentArgumentParser</Title>
+    <Nullable>disable</Nullable>
+    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <NoWarn>1591</NoWarn>
     <DocumentationFile>C:\Projects\Github\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser.xml</DocumentationFile>
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <DocumentationFile>C:\Projects\Github\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser.xml</DocumentationFile>
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
   <Import Project="release.history" />
   <Import Project="..\.paket\Paket.Restore.targets" />

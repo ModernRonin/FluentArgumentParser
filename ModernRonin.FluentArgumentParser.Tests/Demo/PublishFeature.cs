@@ -1,4 +1,3 @@
-﻿namespace ModernRonin.FluentArgumentParser.Tests.Demo
-{
-    public class PublishFeature : FeatureCommand { }
-}
+﻿namespace ModernRonin.FluentArgumentParser.Tests.Demo;
+
+public class PublishFeature : FeatureCommand { }

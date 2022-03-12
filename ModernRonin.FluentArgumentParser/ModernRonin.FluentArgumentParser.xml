@@ -236,9 +236,9 @@
         </member>
         <member name="P:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.DoSkipValidation">
             <summary>
-            Set this to true to prevent your verb and parameter configuration from being validated. This exists only
-            because there seem to be situations when the library used for validation generates MissingMethodExceptions.
-            <para>Use with care - this is bound to be removed in the future once the actual problem has been fixed.</para>
+                Set this to true to prevent your verb and parameter configuration from being validated. This exists only
+                because there seem to be situations when the library used for validation generates MissingMethodExceptions.
+                <para>Use with care - this is bound to be removed in the future once the actual problem has been fixed.</para>
             </summary>
         </member>
         <member name="M:ModernRonin.FluentArgumentParser.Parsing.IBindingCommandLineParser.AddVerb``1">
@@ -272,6 +272,11 @@
             </summary>
         </member>
         <member name="P:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding.Bindings">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding.IsBound">
             <summary>
                 Internal use only.
             </summary>

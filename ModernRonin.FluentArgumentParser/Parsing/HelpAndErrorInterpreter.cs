@@ -3,64 +3,62 @@ using System.Linq;
 using ModernRonin.FluentArgumentParser.Definition;
 using ModernRonin.FluentArgumentParser.Help;
 
-namespace ModernRonin.FluentArgumentParser.Parsing
+namespace ModernRonin.FluentArgumentParser.Parsing;
+
+public class HelpAndErrorInterpreter : IHelpAndErrorInterpreter
 {
-    public class HelpAndErrorInterpreter : IHelpAndErrorInterpreter
+    readonly IHelpMaker _helpMaker;
+
+    public HelpAndErrorInterpreter(IHelpMaker helpMaker) => _helpMaker = helpMaker;
+
+    public HelpResult Interpret(VerbCall call, ICommandLineParser parser)
     {
-        readonly IHelpMaker _helpMaker;
+        if (call.IsHelpRequest) return MakeHelpResult(call, parser);
+        return call.HasError ? ForBadArguments(call, parser.Configuration) : default;
+    }
 
-        public HelpAndErrorInterpreter(IHelpMaker helpMaker) => _helpMaker = helpMaker;
+    public string GetHelpOverview(ICommandLineParser parser) => _helpMaker.GenerateFor(parser);
 
-        public HelpResult Interpret(VerbCall call, ICommandLineParser parser)
+    HelpResult ForBadArguments(VerbCall call, ParserConfiguration configuration)
+    {
+        var argumentErrors = string.Join(Environment.NewLine, call.Arguments.Select(a => a.Error));
+        return new HelpResult
         {
-            if (call.IsHelpRequest) return MakeHelpResult(call, parser);
-            return call.HasError ? ForBadArguments(call, parser.Configuration) : default;
-        }
+            IsResultOfInvalidInput = true,
+            Text = HelpFor(call, configuration) +
+                   Environment.NewLine          +
+                   argumentErrors
+        };
+    }
 
-        public string GetHelpOverview(ICommandLineParser parser) => _helpMaker.GenerateFor(parser);
+    string HelpFor(VerbCall call, ParserConfiguration configuration) =>
+        _helpMaker.GenerateFor(call.Verb, call.IsDefaultVerb, configuration);
 
-        HelpResult ForBadArguments(VerbCall call, ParserConfiguration configuration)
+    HelpResult MakeHelpResult(VerbCall call, ICommandLineParser parser)
+    {
+        if (call.Verb == default)
         {
-            var argumentErrors = string.Join(Environment.NewLine, call.Arguments.Select(a => a.Error));
+            if (call.UnknownVerb == default) return new HelpResult { Text = _helpMaker.GenerateFor(parser) };
             return new HelpResult
             {
                 IsResultOfInvalidInput = true,
-                Text = HelpFor(call, configuration) +
-                       Environment.NewLine          +
-                       argumentErrors
+                Text = _helpMaker.GenerateFor(parser) + Environment.NewLine +
+                       $"Unknown verb '{call.UnknownVerb}'"
             };
         }
 
-        string HelpFor(VerbCall call, ParserConfiguration configuration) =>
-            _helpMaker.GenerateFor(call.Verb, call.IsDefaultVerb, configuration);
-
-        HelpResult MakeHelpResult(VerbCall call, ICommandLineParser parser)
+        if (call.UnknownVerb != default)
         {
-            if (call.Verb == default)
+            return new HelpResult
             {
-                if (call.UnknownVerb == default)
-                    return new HelpResult {Text = _helpMaker.GenerateFor(parser)};
-                return new HelpResult
-                {
-                    IsResultOfInvalidInput = true,
-                    Text = _helpMaker.GenerateFor(parser) + Environment.NewLine +
-                           $"Unknown verb '{call.UnknownVerb}'"
-                };
-            }
-
-            if (call.UnknownVerb != default)
-            {
-                return new HelpResult
-                {
-                    IsResultOfInvalidInput = true,
-                    Text =
-                        HelpFor(call, parser.Configuration) +
-                        Environment.NewLine                 +
-                        $"Unknown verb '{call.UnknownVerb}'"
-                };
-            }
-
-            return new HelpResult {Text = HelpFor(call, parser.Configuration)};
+                IsResultOfInvalidInput = true,
+                Text =
+                    HelpFor(call, parser.Configuration) +
+                    Environment.NewLine                 +
+                    $"Unknown verb '{call.UnknownVerb}'"
+            };
         }
+
+        return new HelpResult { Text = HelpFor(call, parser.Configuration) };
     }
 }

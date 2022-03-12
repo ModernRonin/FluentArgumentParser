@@ -3,30 +3,29 @@ using System.Linq.Expressions;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace ModernRonin.FluentArgumentParser.Tests
+namespace ModernRonin.FluentArgumentParser.Tests;
+
+[TestFixture]
+public class ExpressionExtensionsTests
 {
-    [TestFixture]
-    public class ExpressionExtensionsTests
+    class Record
     {
-        class Record
-        {
-            public int Number { get; set; }
-        }
+        public int Number { get; set; }
+    }
 
-        [Test]
-        public void Membername()
-        {
-            Expression<Func<Record, int>> expression = r => r.Number;
+    [Test]
+    public void Membername()
+    {
+        Expression<Func<Record, int>> expression = r => r.Number;
 
-            expression.MemberName().Should().Be("Number");
-        }
+        expression.MemberName().Should().Be("Number");
+    }
 
-        [Test]
-        public void PropertyInfo()
-        {
-            Expression<Func<Record, int>> expression = r => r.Number;
+    [Test]
+    public void PropertyInfo()
+    {
+        Expression<Func<Record, int>> expression = r => r.Number;
 
-            expression.PropertyInfo().GetValue(new Record {Number = 13}).Should().Be(13);
-        }
+        expression.PropertyInfo().GetValue(new Record { Number = 13 }).Should().Be(13);
     }
 }
