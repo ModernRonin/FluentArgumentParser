@@ -15,6 +15,11 @@ public interface ILeafVerbBinding : IVerbBinding
     /// <summary>
     ///     Internal use only.
     /// </summary>
+    bool IsBound { get; }
+
+    /// <summary>
+    ///     Internal use only.
+    /// </summary>
     object Create(VerbCall call);
 }
 

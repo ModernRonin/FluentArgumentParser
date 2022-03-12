@@ -13,7 +13,7 @@ public static class VerbBindingExtensions
     /// </summary>
     public static void GuardAgainstMissingBindCall(this ILeafVerbBinding self)
     {
-        if (!self.Bindings.Any())
+        if (!self.IsBound)
         {
             throw new InvalidOperationException(
                 $"There are no parameter bindings registered - did you forget to call {nameof(self.Bind)}?");
@@ -68,9 +68,8 @@ public static class VerbBindingExtensions
         int findIndex()
         {
             for (var i = 0; i < self.Verb.Parameters.Length; ++i)
-            {
-                if (self.Verb.Parameters[i] == binding.Parameter) return i;
-            }
+                if (self.Verb.Parameters[i] == binding.Parameter)
+                    return i;
 
             throw new InvalidOperationException();
         }

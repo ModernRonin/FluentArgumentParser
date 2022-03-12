@@ -276,6 +276,11 @@
                 Internal use only.
             </summary>
         </member>
+        <member name="P:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding.IsBound">
+            <summary>
+                Internal use only.
+            </summary>
+        </member>
         <member name="M:ModernRonin.FluentArgumentParser.Parsing.ILeafVerbBinding.Create(ModernRonin.FluentArgumentParser.Parsing.VerbCall)">
             <summary>
                 Internal use only.

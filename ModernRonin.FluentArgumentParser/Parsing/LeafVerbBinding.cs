@@ -36,11 +36,11 @@ public class LeafVerbBinding<TTarget> : ILeafVerbBinding<TTarget> where TTarget 
             .Where(p => p.CanWrite && p.CanRead)
             .Select(toBinding)
             .OrderBy(b => priorityOf(b.Parameter)));
-        //_bindings.Sort(byParameterType);
         _bindings
             .Where(b => b.Parameter is AnIndexableParameter)
             .ForEach((b, i) => ((AnIndexableParameter)b.Parameter).Index = i);
         Verb.Parameters = _bindings.Select(p => p.Parameter).ToArray();
+        IsBound = true;
 
         PropertyParameterBinding<TTarget> toBinding(PropertyInfo propertyInfo)
         {
@@ -57,11 +57,9 @@ public class LeafVerbBinding<TTarget> : ILeafVerbBinding<TTarget> where TTarget 
                 OptionalParameter _ => 1,
                 _ => 2
             };
-        //int byParameterType(IPropertyParameterBinding lhs, IPropertyParameterBinding rhs)
-        //{
-
-        //}
     }
+
+    public bool IsBound { get; private set; }
 
     public IEnumerable<IVerbBinding> ThisAndChildren
     {
