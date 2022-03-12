@@ -1,7 +1,13 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
     <PackageReleaseNotes>
+2.0.0
+    Breaking changes:
+    * FluentArgumentParser requires now Net6
+    Fixes: 
+    * no more problems when validating a configuration in which properties set on the verb come before parameters are set up
+    * verbs without parameters no longer crash the parser
 1.1.0
     Fixes: 
     * validation can be turned off for situations where it doesn't work properly - this is a temporary solution
