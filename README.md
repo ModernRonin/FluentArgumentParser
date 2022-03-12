@@ -11,7 +11,7 @@
 - [Release History](docs/ReleaseHistory.md)
 
 ## Summary
-There are several packages out there for parsing of command-line arguments, but not one of them fulfills everything I think such a library should cover. So I just created another one ;-)
+There are several packages out there for parsing of command-line arguments, but not one of them fulfills everything I think such a library should cover. 
 
 What are these requirements?
 
