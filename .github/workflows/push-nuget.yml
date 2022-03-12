@@ -4,9 +4,9 @@ name: Push nuget
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push to the master branch
+  # Triggers the workflow on push to the main branch
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths: 
       - 'release.history'
 
