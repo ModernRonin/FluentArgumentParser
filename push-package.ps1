@@ -20,4 +20,4 @@ if (-not $version)
 dotnet tool restore
 dotnet paket restore
 dotnet pack --configuration Release
-dotnet nuget push .\ModernRonin.FluentArgumentParser\nupkg\ModernRonin.FluentArgumentParser.$version.nupkg -s https://api.nuget.org/v3/index.json --api-key $nugetApiKey
+dotnet nuget push ./ModernRonin.FluentArgumentParser/nupkg/ModernRonin.FluentArgumentParser.$version.nupkg -s https://api.nuget.org/v3/index.json --api-key $nugetApiKey
