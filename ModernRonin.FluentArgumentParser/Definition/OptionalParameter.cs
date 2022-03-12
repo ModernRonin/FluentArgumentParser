@@ -2,5 +2,16 @@
 
 public class OptionalParameter : AnIndexableParameter
 {
-    public object Default { get; set; }
+    object _default;
+    public bool HasDefaultBeenSet { get; private set; }
+
+    public object Default
+    {
+        get => _default;
+        set
+        {
+            _default = value;
+            HasDefaultBeenSet = true;
+        }
+    }
 }

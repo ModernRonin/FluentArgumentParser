@@ -35,6 +35,6 @@
     <DocumentationFile>C:\Projects\Github\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser\ModernRonin.FluentArgumentParser.xml</DocumentationFile>
     <WarningLevel>5</WarningLevel>
   </PropertyGroup>
-  <Import Project="release.history" />
+  <Import Project="..\release.history" />
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

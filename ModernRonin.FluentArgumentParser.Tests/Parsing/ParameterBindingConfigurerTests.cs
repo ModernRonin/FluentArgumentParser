@@ -127,6 +127,42 @@ public class ParameterBindingConfigurerTests
     }
 
     [Test]
+    public void MakeOptional_sets_DefaultValue_for_reference_types_to_null()
+    {
+        AParameter parameter = new RequiredParameter
+        {
+            Index = 2,
+            LongName = "alpha",
+            ShortName = "bravo",
+            Type = typeof(string)
+        };
+
+        var underTest = new ParameterBindingConfigurer<int>(() => parameter, v => parameter = v);
+
+        underTest.MakeOptional();
+
+        ((OptionalParameter)parameter).Default.Should().BeNull();
+    }
+
+    [Test]
+    public void MakeOptional_sets_HasDefaultBeenSet_to_true()
+    {
+        // arrange
+        AParameter parameter = new RequiredParameter
+        {
+            Index = 2,
+            LongName = "alpha",
+            ShortName = "bravo",
+            Type = typeof(string)
+        };
+        var underTest = new ParameterBindingConfigurer<int>(() => parameter, v => parameter = v);
+        // act
+        underTest.MakeOptional();
+        // assert
+        ((OptionalParameter)parameter).HasDefaultBeenSet.Should().BeTrue();
+    }
+
+    [Test]
     public void MakeOptional_Switches_Required_To_Optional_Parameter()
     {
         AParameter parameter = new RequiredParameter
@@ -149,7 +185,8 @@ public class ParameterBindingConfigurerTests
                 Index = 2,
                 LongName = "alpha",
                 ShortName = "bravo",
-                Type = typeof(int)
+                Type = typeof(int),
+                Default = 0
             }, cfg => cfg.Excluding(o => o.Default));
     }
 

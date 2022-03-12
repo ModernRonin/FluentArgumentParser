@@ -9,11 +9,7 @@ namespace ModernRonin.FluentArgumentParser.Tests.Validation;
 public class OptionalParameterValidatorTests
 {
     [Test]
-    public void Default_cannot_be_null() =>
-        new OptionalParameterValidator().TestValidate(new OptionalParameter
-            {
-                Type = typeof(string),
-                Default = null
-            })
+    public void HasDefaultBeenSet_must_be_true() =>
+        new OptionalParameterValidator().TestValidate(new OptionalParameter { Type = typeof(string) })
             .ShouldHaveValidationErrorFor(p => p.Default);
 }
