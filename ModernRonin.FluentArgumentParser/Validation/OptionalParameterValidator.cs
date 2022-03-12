@@ -8,6 +8,6 @@ public class OptionalParameterValidator : AbstractValidator<OptionalParameter>
     public OptionalParameterValidator()
     {
         Include(new IndexableParameterValidator());
-        RuleFor(p => p.Default).NotNull();
+        RuleFor(p => p.Default).Must((p, _) => p.HasDefaultBeenSet);
     }
 }
