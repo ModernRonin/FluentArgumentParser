@@ -4,9 +4,9 @@ name: Push nuget
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push to the master branch
+  # Triggers the workflow on push to the main branch
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths: 
       - 'release.history'
 
@@ -23,6 +23,8 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 6.0.x
+      - name: restore tools
+        run: dotnet tool restore
       - name: run push-package
         shell: pwsh
         env:

@@ -1,7 +1,9 @@
 # FluentArgumentParser
 
+[![CI Status](https://github.com/ModernRonin/FluentArgumentParser/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ModernRonin/FluentArgumentParser/actions/workflows/dotnet.yml)
 [![NuGet](https://img.shields.io/nuget/v/ModernRonin.FluentArgumentParser.svg)](https://www.nuget.org/packages/ModernRonin.FluentArgumentParser/)
 [![NuGet](https://img.shields.io/nuget/dt/ModernRonin.FluentArgumentParser.svg)](https://www.nuget.org/packages/ModernRonin.FluentArgumentParser)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
 - [Summary](#summary)
 - [Quickstart](#quick-start---zero-configuration)
