@@ -29,4 +29,4 @@ jobs:
         shell: pwsh
         env:
           NUGETAPIKEY: ${{ secrets.NUGETAPIKEY }}
-        run: push-package.ps1
+        run: ./push-package.ps1
