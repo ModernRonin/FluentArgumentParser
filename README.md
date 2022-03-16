@@ -119,8 +119,7 @@ see [More Examples](docs/Examples.md#multiple-and-nested-verbs-with-additional-c
 - last not least, you can always take a look at the [demo tests](ModernRonin.FluentArgumentParser.Tests/Demo)
 
 ## Contributing
-If you want to contribute, you are more than welcome. 
-Clone the repository, do your work on a separate branch than main, and create a pull request once you feel comfortable enough to have your changes reviewed.
+If you want to contribute, you are more than welcome. Fork the repository, make your desired changes, and create a pull request into the source repository default branch (you can read more about the fork and pull model [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models))
 
 ### .NET version
 The solution requires .NET 6.x SDK installed on your machine.
@@ -134,6 +133,7 @@ dotnet paket restore
 ```
 
 This will restore all necessary packages in order to run the solution.
+
 ### Labels
 
 Check out the issues page. There are a few issues marked as `good-first-issue` and a few others as `help-wanted`. 
