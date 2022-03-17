@@ -9,7 +9,7 @@ if (-not $nugetApiKey)
 
 if (-not $version) 
 {
-	[xml]$xml= Get-Content .\ModernRonin.FluentArgumentParser\release.history
+	[xml]$xml= Get-Content .\release.history
 	$version= $xml.Project.PropertyGroup.Version.ToString()
 }
 if (-not $version) 
@@ -17,6 +17,7 @@ if (-not $version)
 	Write-Host "Something went wrong, could not read version from release.history"
 	exit 
 }
-
+dotnet tool restore
+dotnet paket restore
 dotnet pack --configuration Release
-dotnet nuget push .\ModernRonin.FluentArgumentParser\nupkg\ModernRonin.FluentArgumentParser.$version.nupkg -s https://api.nuget.org/v3/index.json --api-key $nugetApiKey
+dotnet nuget push ./ModernRonin.FluentArgumentParser/nupkg/ModernRonin.FluentArgumentParser.$version.nupkg -s https://api.nuget.org/v3/index.json --api-key $nugetApiKey
