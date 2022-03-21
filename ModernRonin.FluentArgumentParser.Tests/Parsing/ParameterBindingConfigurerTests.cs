@@ -243,4 +243,16 @@ public class ParameterBindingConfigurerTests
 
         underTest.WithShortName("alpha").Should().BeSameAs(underTest);
     }
+
+    [Test]
+    public void WithDescription_Should_Set_Description()
+    {
+        string value = "testDescription";
+        var parameter = new OptionalParameter();
+        var underTest = new ParameterBindingConfigurer<string>(() => parameter, _ => { });
+
+        underTest.WithDefaultDescription(value);
+
+        parameter.Description.Should().Be(value);
+    }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using ModernRonin.FluentArgumentParser.Definition;
 using ModernRonin.FluentArgumentParser.Extensibility;
 using ModernRonin.FluentArgumentParser.Parsing;
+
 using MoreLinq.Extensions;
 
 namespace ModernRonin.FluentArgumentParser.Help;
@@ -184,7 +186,14 @@ public class HelpMaker : IHelpMaker
         Row optionalToRow(OptionalParameter opt)
         {
             var result = indexableToRow(opt);
-            result.RightLines.Add(opt.Description);
+            if (opt.Default == null)
+            {
+                result.RightLines.Add(opt.Description);
+            }
+            else
+            {
+                result.RightLines.Add($"Default: {opt.Default}");
+            }
             return result;
         }
 
@@ -219,10 +228,10 @@ public class HelpMaker : IHelpMaker
         addDescription();
         Line("Available commands:");
         Table(materialized.Select(v => new Row
-            {
-                LeftText = v.Name,
-                RightLines = { v.HelpText }
-            })
+        {
+            LeftText = v.Name,
+            RightLines = { v.HelpText }
+        })
             .ToArray());
         LineFeed();
         Line("use help <command> for more detailed help on a specific command");

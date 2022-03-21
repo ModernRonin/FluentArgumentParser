@@ -12,12 +12,7 @@ public class OptionalParameterValidator : AbstractValidator<OptionalParameter>
         RuleFor(p => p.Default).Must((p, _) => p.HasDefaultBeenSet);
         RuleFor(p => p.Description).Must((p, _) =>
         {
-            if (!p.HasDefaultBeenSet)
-            {
-                return false;
-            }
-
-            if (p.Default.GetType().DefaultValue == null)
+            if (p.Default is null && string.IsNullOrEmpty(p.Description))
             {
                 return false;
             }
