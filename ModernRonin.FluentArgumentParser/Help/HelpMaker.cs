@@ -184,7 +184,7 @@ public class HelpMaker : IHelpMaker
         Row optionalToRow(OptionalParameter opt)
         {
             var result = indexableToRow(opt);
-            result.RightLines.Add($"default: {opt.Default}");
+            result.RightLines.Add(opt.Description);
             return result;
         }
 

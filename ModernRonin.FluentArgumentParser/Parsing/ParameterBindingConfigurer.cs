@@ -120,4 +120,23 @@ public sealed class ParameterBindingConfigurer<TProperty>
         Parameter.HelpText = helpText;
         return this;
     }
+
+    /// <summary>
+    ///     <para>
+    ///     Set default description for optional parameter.
+    ///     </para>
+    ///     Default description is required for reference types with a default value of null
+    /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
+    public ParameterBindingConfigurer<TProperty> WithDefaultDescription(string text)
+    {
+        if (!(Parameter is OptionalParameter optional))
+        {
+            throw new InvalidOperationException(
+                $"Default are only settable for optional parameters - maybe you forgot a call to {nameof(MakeOptional)}?");
+        }
+
+        optional.Description = text;
+        return this;
+    }
 }
