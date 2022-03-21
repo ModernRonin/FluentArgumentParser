@@ -195,6 +195,7 @@ public class LeafVerbBindingTests
     }
 
     [Test]
+    [SetCulture("en-US")]
     public void Integration_Usage_With_CommandLineParser()
     {
         _underTest.Bind();

@@ -22,6 +22,7 @@ public class HelpMakerTests
     }
 
     [Test]
+    [SetCulture("en-US")]
     public void GenerateFor_DefaultVerb()
     {
         var verb = new Verb
@@ -89,6 +90,7 @@ public class HelpMakerTests
     }
 
     [Test]
+    [SetCulture("en-US")]
     public void GenerateFor_Overview_With_Multiple_Verbs()
     {
         var parser = Substitute.For<ICommandLineParser>();
@@ -123,6 +125,7 @@ public class HelpMakerTests
     }
 
     [Test]
+    [SetCulture("en-US")]
     public void GenerateFor_SingleVerb()
     {
         var verb = new Verb
@@ -190,6 +193,7 @@ public class HelpMakerTests
     }
 
     [Test]
+    [SetCulture("en-US")]
     public void GenerateFor_SingleVerb_if_no_HelpTexts_are_set()
     {
         var verb = new Verb
