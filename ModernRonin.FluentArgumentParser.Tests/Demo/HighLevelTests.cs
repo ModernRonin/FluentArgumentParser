@@ -174,6 +174,7 @@ public class HighLevelTests
     }
 
     [Test]
+    [SetCulture("en-US")]
     public void Unknown_Verb_results_in_Help()
     {
         var parser = ParserFactory.Create(new ParserConfiguration

@@ -60,6 +60,7 @@ public class VerbParserTests
     [TestCase(typeof(float), "/v:x", null, "Value for 'value' is not valid")]
     [TestCase(typeof(Color), "/v:x", null, "Value for 'value' is not valid")]
     [TestCase(typeof(Color), null, null, "'value' was not given, but is required")]
+    [SetCulture("en-US")]
     public void Parse_single_RequiredParameter(Type type,
         string input,
         object expected,
@@ -116,6 +117,7 @@ public class VerbParserTests
     [TestCase(typeof(int), null, 7337)]
     [TestCase(typeof(float), null, 2.71f)]
     [TestCase(typeof(Color), null, Color.Green)]
+    [SetCulture("en-US")]
     public void Parse_single_OptionalParameter(Type type,
         string input,
         object expected,
