@@ -4,6 +4,7 @@ public class OptionalParameter : AnIndexableParameter
 {
     object _default;
     public bool HasDefaultBeenSet { get; private set; }
+    public string Description { get; set; }
 
     public object Default
     {
